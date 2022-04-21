@@ -1,0 +1,15 @@
+h3 {
+    color: gray;
+    font-weight: bold;
+    font-size: 26px;
+    letter-spacing: 0.1em;
+    transition: 0.3s;
+}
+
+h3:hover {
+    color: blue;
+}
+
+._active {
+    color: blue;
+}
