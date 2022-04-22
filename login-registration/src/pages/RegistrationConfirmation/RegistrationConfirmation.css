@@ -1,0 +1,34 @@
+.registrationConfirmationWrapper {
+    padding-top: 100px;
+    max-width: 450px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    align-items: center;
+}
+
+.registrationConfirmation__title {
+    color: blue;
+    pointer-events: none;
+}
+
+.registrationConfirmation__text {
+    font-size: 18px;
+    text-align: center;
+}
+
+.registrationConfirmation__text a {
+    text-decoration: none;
+    color: blue;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.registrationConfirmation__text a:hover {    
+    color: rgb(63, 63, 255);
+}
+
+.registrationConfirmation__btnHome {
+    width: 300px;
+}
