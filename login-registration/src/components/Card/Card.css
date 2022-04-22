@@ -1,0 +1,38 @@
+.card {
+    background-color: #FFFFFF;
+    padding: 20px;
+    border-radius: 9px;
+    width: 300px;
+    height: 250px; 
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.card__image {
+    display: flex;
+    border-radius: 9px;
+    overflow: hidden;
+}
+
+.card__image img {
+    width: 260px;
+    height: 100px;
+}
+
+.card__title {
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    font-size: 18px;
+}
+
+.card__text {
+    font-size: 14px;
+    color: gray;
+}
+
+.card__date {
+    color: skyblue;
+    font-weight: bold;
+}
