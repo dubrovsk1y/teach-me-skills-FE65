@@ -1,8 +1,15 @@
-import React from "react";
+import React, { FC } from "react";
 import './Input.css'
 
-const Input = (props: any) => {
-    return <input type={props.type} className={props.className} id={props.id}/>
+type InputProps = {
+    type: string;
+    className: string;
+    id: string;
+    placeholder: string;
+}
+
+const Input: FC<InputProps> = ({type, className, id, placeholder}) => {
+    return <input type={type} className={className} id={id} placeholder={placeholder}/>
 }
 
 export default Input
