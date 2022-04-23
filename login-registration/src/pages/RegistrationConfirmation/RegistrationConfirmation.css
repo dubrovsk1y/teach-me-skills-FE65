@@ -10,7 +10,9 @@
 
 .registrationConfirmation__title {
     color: blue;
-    pointer-events: none;
+    font-weight: bold;
+    font-size: 30px;
+    letter-spacing: 0.1em;
 }
 
 .registrationConfirmation__text {

@@ -1,6 +1,5 @@
 import React from 'react';
 import './App.css';
-import RegistrationConfirmation from './pages/RegistrationConfirmation';
 
 function App() {
   return (

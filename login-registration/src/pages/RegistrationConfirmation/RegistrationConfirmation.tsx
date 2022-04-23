@@ -1,12 +1,11 @@
 import React from "react";
 import './RegistrationConfirmation.css'
-import Title from "../../components/Title";
 import Button from "../../components/Button";
 
 const RegistrationConfirmation = () => {
     return (
         <div className="registrationConfirmationWrapper">
-            <Title className={'registrationConfirmation__title'} text={'Registration Confirmation'}></Title>
+            <h3 className="registrationConfirmation__title">Registration Confirmation</h3>
             <p className="registrationConfirmation__text">
                 Please activate your account with the activation link in the email <a href="#.">test@gmail.com</a> Please check your email
             </p>
