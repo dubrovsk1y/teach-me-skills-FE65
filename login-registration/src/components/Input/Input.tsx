@@ -6,6 +6,8 @@ type InputProps = {
     className: string;
     id: string;
     placeholder: string;
+    value?: string;
+    onChange?: any;
 }
 
 const Input: FC<InputProps> = ({type, className, id, placeholder}) => {

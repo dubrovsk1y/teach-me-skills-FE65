@@ -21,6 +21,14 @@
 
 .authorizationForm label {
     font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.authorizationForm__validText {
+    font-weight: bold;
+    color: red;
+    min-height: 20px;
 }
 
 .authorizationForm__btn {
