@@ -7,7 +7,7 @@ type InputProps = {
     id: string;
     placeholder: string;
     value?: string;
-    onChange?: any;
+    onChange?: (event: any) => void;
 }
 
 const Input: FC<InputProps> = ({type, className, id, placeholder}) => {
