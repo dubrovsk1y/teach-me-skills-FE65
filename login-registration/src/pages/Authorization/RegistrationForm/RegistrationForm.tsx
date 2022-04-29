@@ -1,7 +1,10 @@
 import React, { useState, FC } from "react"
 import Button from "../../../components/Button"
 import Input from "../../../components/Input"
-
+import checkForLowerСaseLetters from "../../../util/checkForLowerСaseLetters"
+import checkForUpperСaseLetters from "../../../util/checkForUpperСaseLetters"
+import checkForNumbers from "../../../util/checkForNubers"
+import checkForRuLetters from "../../../util/checkForRuLetters"
 
 type RegistrationFormProps = {
     onLoginClick: (name: string) => void;
@@ -10,78 +13,22 @@ type RegistrationFormProps = {
 
 const RegistrationForm: FC<RegistrationFormProps> = (props) => { 
     const {onLoginClick, onRegistrationClick} = props
-    const [isRegistrationFormActive, setRegistrationFormActive] = useState(false)
+    const [isFormActive, setFormActive] = useState(false)
     
-    const [userNameRegistrationValue, setUserNameRegistrationValue] = useState('')
-    const [emailRegistrationValue, setEmailRegistrationValue] = useState('')
-    const [passwordRegistrationValue, setPasswordRegistrationValue] = useState('')
-    const [passwordConfirmRegistrationValue, setPasswordConfirmRegistrationValue] = useState('')
+    const [userNameValue, setUserNameValue] = useState('')
+    const [emailValue, setEmailValue] = useState('')
+    const [passwordValue, setPasswordValue] = useState('')
+    const [passwordConfirmValue, setPasswordConfirmValue] = useState('')
 
-    const validationRegistrationForm = (userName: string, email: string, password: string, confirmPassword: string) => {
+    const validationForm = (userName: string, email: string, password: string, confirmPassword: string) => {
         
         const validErrors: {userName?: string, email?: string, password?: string, confirmPassword?: string} = {}
-        
-        const checkForNumbers = (string: string) => {
-            const numbersToString: string[] = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0']
-    
-            let isContain = false
-    
-            string.split('').forEach(item => {
-                if(numbersToString.includes(item)) {
-                    isContain = true
-                }
-                
-            })
-    
-            return isContain
-        }
-
-        const checkForLowerСaseLetters = (string: string) => {
-            let arr_en: string[] = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
-            let isContain = false
-    
-            string.split('').forEach(item => {
-                if(arr_en.includes(item)) {
-                    isContain = true
-                }
-                
-            })
-    
-            return isContain
-        }
-
-        const checkForUpperСaseLetters = (string: string) => {
-            let arr_EN = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];           
-            let isContain = false
-
-            string.split('').forEach(item => {
-                if(arr_EN.includes(item)) {
-                    isContain = true
-                }
-                
-            })
-    
-            return isContain
-        }
-
-        const checkForRuLetters = (string: string) => {
-            let arr_ru = ['а', 'б', 'в', 'г', 'д', 'е', 'ё', 'ж', 'з', 'и', 'й', 'к', 'л', 'м', 'н', 'о', 'п', 'р', 'с', 'т', 'у', 'ф', 'х', 'ц', 'ч', 'ш', 'щ', 'э', 'ю', 'я'];
-            let isContain = false
-
-            string.toLowerCase().split('').forEach(item => {
-                if(arr_ru.includes(item)) {
-                    isContain = true
-                }
-                
-            })
-    
-            return isContain
-        }
 
         if(userName.length > 15) validErrors.userName = 'User name must not exceed 15 characters'
         if(checkForRuLetters(userName)) validErrors.password = 'User name must not contain Russian letters'
         if(!userName.trim()) validErrors.userName  = 'This is a required field'
-
+        
+        if(checkForRuLetters(email)) validErrors.email = 'Email must not contain Russian letters'
         if(!email.trim()) validErrors.email  = 'This is a required field'
 
         if(!checkForLowerСaseLetters(password)) validErrors.password = 'Password must contain lower case letters'
@@ -96,31 +43,49 @@ const RegistrationForm: FC<RegistrationFormProps> = (props) => {
         return Object.keys(validErrors).length ? validErrors : null
     }
 
-    const valid = validationRegistrationForm(userNameRegistrationValue, emailRegistrationValue, passwordRegistrationValue, passwordConfirmRegistrationValue)
+    const [validation, setValidation] = useState(validationForm(userNameValue, emailValue, passwordValue, passwordConfirmValue))
 
-    const onRegistrationSubmitForm = (event: any) => {
+    const onSubmitForm = (event: any) => {
         event.preventDefault()
+        setFormActive(true)
 
-        setRegistrationFormActive(true)
-
-        if(!valid) {
-            onRegistrationClick()
-            setRegistrationFormActive(false)
-            setUserNameRegistrationValue('')
-            setEmailRegistrationValue('')
-            setPasswordRegistrationValue('')
-            setPasswordConfirmRegistrationValue('')
+        if(!validation) {
+            setFormActive(false)
+            setUserNameValue('')
+            setEmailValue('')
+            setPasswordValue('')
+            setPasswordConfirmValue('')
         }
     }
 
+    const onChangeUserName = (event: any) => {
+        setUserNameValue(event.target.value)
+        setValidation(validationForm(event.target.value, emailValue, passwordValue, passwordConfirmValue))
+    }
+
+    const onChangeEmail = (event: any) => {
+        setEmailValue(event.target.value)
+        setValidation(validationForm(userNameValue, event.target.value, passwordValue, passwordConfirmValue))
+    }
+
+    const onChangePassword = (event: any) => {
+        setPasswordValue(event.target.value)
+        setValidation(validationForm(userNameValue, emailValue, event.target.value, passwordConfirmValue))
+    }
+
+    const onChangeConfirmPassword = (event: any) => {
+        setPasswordConfirmValue(event.target.value)
+        setValidation(validationForm(userNameValue, emailValue, passwordValue, event.target.value))
+    }
+
     return (     
-        <form onSubmit={onRegistrationSubmitForm} action="" className="authorizationForm">
+        <form onSubmit={onSubmitForm} action="" className="authorizationForm">
             <div>
                 <label>
                     User name
                     <Input 
-                        onChange={(event: any) => setUserNameRegistrationValue(event.target.value)} 
-                        value={userNameRegistrationValue}
+                        onChange={onChangeUserName} 
+                        value={userNameValue}
                         placeholder={'Enter your user name'} 
                         className={'authorizationForm__input'} 
                         type={'text'} 
@@ -129,15 +94,15 @@ const RegistrationForm: FC<RegistrationFormProps> = (props) => {
                 </label>
                 <p 
                     className="authorizationForm__validText">
-                    {isRegistrationFormActive ? (valid?.userName ? valid.userName : '') : ''}    
+                    {isFormActive ? (validation?.userName ? validation.userName : '') : ''}    
                 </p>
             </div>
             <div>
                 <label>
                     Email
                     <Input 
-                        onChange={(event: any) => setEmailRegistrationValue(event.target.value)} 
-                        value={emailRegistrationValue}
+                        onChange={onChangeEmail} 
+                        value={emailValue}
                         placeholder={'Enter your email'} 
                         className={'authorizationForm__input'} 
                         type={'email'} 
@@ -146,15 +111,15 @@ const RegistrationForm: FC<RegistrationFormProps> = (props) => {
                 </label>
                 <p 
                     className="authorizationForm__validText">
-                    {isRegistrationFormActive ? (valid?.email ? valid.email : '') : ''}    
+                    {isFormActive ? (validation?.email ? validation.email : '') : ''}    
                 </p>
             </div>
             <div>
                 <label>
                     Password
                     <Input 
-                        onChange={(event: any) => setPasswordRegistrationValue(event.target.value)} 
-                        value={passwordRegistrationValue}
+                        onChange={onChangePassword} 
+                        value={passwordValue}
                         placeholder={'Enter your password'} 
                         className={'authorizationForm__input'} 
                         type={'password'} 
@@ -163,15 +128,15 @@ const RegistrationForm: FC<RegistrationFormProps> = (props) => {
                 </label>
                 <p 
                     className="authorizationForm__validText">
-                    {isRegistrationFormActive ? (valid?.password ? valid.password : '') : ''}    
+                    {isFormActive ? (validation?.password ? validation.password : '') : ''}    
                 </p>
             </div>
             <div>
                 <label>
                     Confirm Password
                     <Input 
-                        onChange={(event: any) => setPasswordConfirmRegistrationValue(event.target.value)} 
-                        value={passwordConfirmRegistrationValue}
+                        onChange={onChangeConfirmPassword} 
+                        value={passwordConfirmValue}
                         placeholder={'Enter your password again'} 
                         className={'authorizationForm__input'} 
                         type={'password'} 
@@ -180,7 +145,7 @@ const RegistrationForm: FC<RegistrationFormProps> = (props) => {
                 </label>
                 <p 
                     className="authorizationForm__validText">
-                    {isRegistrationFormActive ? (valid?.confirmPassword ? valid.confirmPassword : '') : ''}    
+                    {isFormActive ? (validation?.confirmPassword ? validation.confirmPassword : '') : ''}    
                 </p>
             </div>
             <Button className={'authorizationForm__btn'} text={'Registration'}></Button>

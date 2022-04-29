@@ -7,11 +7,11 @@ type InputProps = {
     id: string;
     placeholder: string;
     value?: string;
-    onChange?: (event: any) => void;
+    onChange?: any;
 }
 
-const Input: FC<InputProps> = ({type, className, id, placeholder}) => {
-    return <input type={type} className={className} id={id} placeholder={placeholder}/>
+const Input: FC<InputProps> = ({type, className, id, placeholder, onChange, value}) => {
+    return <input value={value} onChange={onChange} type={type} className={className} id={id} placeholder={placeholder}/>
 }
 
 export default Input

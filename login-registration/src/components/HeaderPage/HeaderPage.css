@@ -1,0 +1,124 @@
+.header {
+    background-color: white;
+}
+
+.header__container {
+    max-width: 900px;
+    margin: 0 auto;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.header__title {
+    color: blue;
+    cursor: pointer;
+}
+
+.menu__icon {
+    z-index: 5;
+    position: relative;
+    width: 30px;
+    height: 18px;
+    cursor: pointer;
+}
+
+.menu__icon._active span {
+    transform: scale(0) translate(0px, -50%);
+}
+
+.menu__icon._active::before {
+    top: 50%;
+    transform: rotate(-45deg) translate(0px, -50%);
+}
+
+.menu__icon._active::after {
+    bottom: 50%;
+    transform: rotate(45deg) translate(0px, -50%);
+}
+
+.menu__icon span,
+.menu__icon::before,
+.menu__icon::after {
+    left: 0;
+    position: absolute;
+    transition: 0.3s;
+    width: 100%;
+    height: 2px;
+    background-color: blue;
+}
+
+.menu__icon._active span,
+.menu__icon._active::before,
+.menu__icon._active::after {
+    background-color: white; 
+}
+
+.menu__icon::before,
+.menu__icon::after {
+    content: "";
+}
+
+.menu__icon::before {
+    top: 0;
+}
+
+.menu__icon::after {
+    bottom: 0;
+}
+
+.menu__icon span {
+    top: 50%;
+    transform: scale(1) translate(0px, -50%);
+}
+
+.menu__body {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background-color: blue;
+    transition: 0.3s;
+    transform: translate(0px, -100%);
+}
+
+.menu__body._active {
+    transform: translate(0px, 0px); 
+}
+
+.menu__body__container {
+    padding-top: 80px;
+    min-height: 150px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.menu__list {
+    padding: 0px 40px;
+    display: flex;
+    gap: 100px;
+    justify-content: space-between;
+}
+
+.menu__list li {
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    list-style-type: none;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.menu__list li:not(:last-child) {
+    margin-bottom: 10px;
+}
+
+.menu__list li:hover {
+    color: skyblue;
+}
+
+.menu__list__main {
+    display: flex;
+    gap: 100px;
+}
