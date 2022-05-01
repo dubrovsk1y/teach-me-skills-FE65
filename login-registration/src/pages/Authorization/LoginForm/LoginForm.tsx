@@ -8,11 +8,8 @@ import checkForNumbers from "../../../util/checkForNubers"
 import checkForRuLetters from "../../../util/checkForRuLetters"
 
 const LoginForm = () => {
-    const { theme, onChangeTheme = () => {} } = useThemeContext()
+    const { theme } = useThemeContext()
     const isLightTheme = theme === Theme.Light
-    const onClickTheme = () => {
-        onChangeTheme(Theme.Dark)
-    }
 
     const validationForm = (email: string, password: string) => {
         
@@ -57,7 +54,6 @@ const LoginForm = () => {
     }
 
     return (
-        // <div className={isLightTheme ? 'container _light' : 'container _dark'}>
             <form onSubmit={onLoginSubmitForm} action="" className="authorizationForm">
                 <div>
                     <label>
@@ -66,7 +62,7 @@ const LoginForm = () => {
                             onChange={onChangeEmail} 
                             value={emailValue} 
                             placeholder={'Enter your email'} 
-                            className={'authorizationForm__input'} 
+                            className={isLightTheme ? 'authorizationForm__input' : 'authorizationForm__input _dark'} 
                             type={'email'} 
                             id={'email'}
                         ></Input>
@@ -84,7 +80,7 @@ const LoginForm = () => {
                             onChange={onChangePassword}
                             value={passwordValue}
                             placeholder={'Enter your password'} 
-                            className={'authorizationForm__input'} 
+                            className={isLightTheme ? 'authorizationForm__input' : 'authorizationForm__input _dark'} 
                             type={'password'} 
                             id={'password'}
                         ></Input>
@@ -98,7 +94,6 @@ const LoginForm = () => {
                 <Button className={'authorizationForm__btn'} text={'Login'}></Button>
                 <p className="authorizationForm__footer">Forgot your password? <span>Reset password</span></p>
             </form>
-        // </div>
     )
 }
 

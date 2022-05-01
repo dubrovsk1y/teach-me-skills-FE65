@@ -1,14 +1,13 @@
-.authorizationWrapper {
-    padding-top: 100px;
-    max-width: 450px;
-    margin: 0 auto;
+.authorization__container {
     display: flex;
     flex-direction: column;
-    gap: 50px;
     align-items: center;
+    padding-top: 100px;
+    gap: 50px;
 }
 
 .authorizationForm {
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
     max-width: 300px;
@@ -19,10 +18,18 @@
     margin-top: 5px;
 }
 
+.authorizationForm__input._dark {
+    border-color: blue;
+}
+
 .authorizationForm label {
     font-weight: bold;
     display: block;
     margin-bottom: 5px;
+}
+
+._dark label {
+    color: white;
 }
 
 .authorizationForm__validText {

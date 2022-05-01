@@ -1,4 +1,7 @@
-import React, { useState, FC } from "react"
+import React, { useState } from "react"
+import { useNavigate } from "react-router-dom"
+import { Theme, useThemeContext } from "../../../context/themeModeContext"
+
 import Button from "../../../components/Button"
 import Input from "../../../components/Input"
 import checkForLowerСaseLetters from "../../../util/checkForLowerСaseLetters"
@@ -6,13 +9,10 @@ import checkForUpperСaseLetters from "../../../util/checkForUpperСaseLetters"
 import checkForNumbers from "../../../util/checkForNubers"
 import checkForRuLetters from "../../../util/checkForRuLetters"
 
-type RegistrationFormProps = {
-    onLoginClick: (name: string) => void;
-    onRegistrationClick: () => void;
-}
+const RegistrationForm = () => {
+    const { theme } = useThemeContext()
+    const isLightTheme = theme === Theme.Light
 
-const RegistrationForm: FC<RegistrationFormProps> = (props) => { 
-    const {onLoginClick, onRegistrationClick} = props
     const [isFormActive, setFormActive] = useState(false)
     
     const [userNameValue, setUserNameValue] = useState('')
@@ -44,12 +44,18 @@ const RegistrationForm: FC<RegistrationFormProps> = (props) => {
     }
 
     const [validation, setValidation] = useState(validationForm(userNameValue, emailValue, passwordValue, passwordConfirmValue))
+    const navigate = useNavigate()
 
     const onSubmitForm = (event: any) => {
         event.preventDefault()
         setFormActive(true)
 
         if(!validation) {
+            navigate('/confirmation', {
+                state: {
+                    emailValue,
+                }
+            })
             setFormActive(false)
             setUserNameValue('')
             setEmailValue('')
@@ -87,7 +93,7 @@ const RegistrationForm: FC<RegistrationFormProps> = (props) => {
                         onChange={onChangeUserName} 
                         value={userNameValue}
                         placeholder={'Enter your user name'} 
-                        className={'authorizationForm__input'} 
+                        className={isLightTheme ? 'authorizationForm__input' : 'authorizationForm__input _dark'} 
                         type={'text'} 
                         id={'userName'}
                     ></Input> 
@@ -104,7 +110,7 @@ const RegistrationForm: FC<RegistrationFormProps> = (props) => {
                         onChange={onChangeEmail} 
                         value={emailValue}
                         placeholder={'Enter your email'} 
-                        className={'authorizationForm__input'} 
+                        className={isLightTheme ? 'authorizationForm__input' : 'authorizationForm__input _dark'} 
                         type={'email'} 
                         id={'email'}
                     ></Input>
@@ -121,7 +127,7 @@ const RegistrationForm: FC<RegistrationFormProps> = (props) => {
                         onChange={onChangePassword} 
                         value={passwordValue}
                         placeholder={'Enter your password'} 
-                        className={'authorizationForm__input'} 
+                        className={isLightTheme ? 'authorizationForm__input' : 'authorizationForm__input _dark'} 
                         type={'password'} 
                         id={'password'}
                     ></Input>
@@ -138,7 +144,7 @@ const RegistrationForm: FC<RegistrationFormProps> = (props) => {
                         onChange={onChangeConfirmPassword} 
                         value={passwordConfirmValue}
                         placeholder={'Enter your password again'} 
-                        className={'authorizationForm__input'} 
+                        className={isLightTheme ? 'authorizationForm__input' : 'authorizationForm__input _dark'} 
                         type={'password'} 
                         id={'confirmPassword'}
                     ></Input>
@@ -149,7 +155,7 @@ const RegistrationForm: FC<RegistrationFormProps> = (props) => {
                 </p>
             </div>
             <Button className={'authorizationForm__btn'} text={'Registration'}></Button>
-            <p className="authorizationForm__footer">If you have account you can <span onClick={() => onLoginClick('login')}>login</span></p>
+            <p className="authorizationForm__footer">If you have account you can <span onClick={() => navigate('/authorization/login')}>login</span></p>
         </form>   
     ) 
 }
