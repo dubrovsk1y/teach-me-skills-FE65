@@ -100,9 +100,6 @@
 
 .menu__body__container {
     min-height: 150px;
-    max-width: 1280px;
-    padding: 0 40px;
-    margin: 0 auto;
 }
 
 .menu__list {
