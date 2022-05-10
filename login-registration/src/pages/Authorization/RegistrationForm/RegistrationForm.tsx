@@ -9,7 +9,7 @@ import checkForUpperСaseLetters from "../../../util/checkForUpperСaseLetters"
 import checkForNumbers from "../../../util/checkForNubers"
 import checkForRuLetters from "../../../util/checkForRuLetters"
 
-const RegistrationForm = () => {
+const RegistrationForm = ({onLoginClick}:any) => {
     const { theme } = useThemeContext()
     const isLightTheme = theme === Theme.Light
 
@@ -155,7 +155,7 @@ const RegistrationForm = () => {
                 </p>
             </div>
             <Button className={'authorizationForm__btn'} text={'Registration'}></Button>
-            <p className="authorizationForm__footer">If you have account you can <span onClick={() => navigate('/authorization/login')}>login</span></p>
+            <p className="authorizationForm__footer">If you have account you can <span onClick={() => onLoginClick('login')}>login</span></p>
         </form>   
     ) 
 }

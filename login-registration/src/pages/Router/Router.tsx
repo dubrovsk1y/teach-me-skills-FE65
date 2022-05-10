@@ -4,8 +4,7 @@ import HeaderPage from "../../components/HeaderPage";
 import CardList from "../../components/CardList";
 import Authorization from "../Authorization";
 import RegistrationConfirmation from "../RegistrationConfirmation";
-import LoginForm from "../Authorization/LoginForm";
-import RegistrationForm from "../Authorization/RegistrationForm";
+import Information from "../Information";
 
 const Router = () => {
     const isLoggedIn = localStorage.getItem("isLoggedIn")
@@ -15,17 +14,14 @@ const Router = () => {
                 <Routes>
                     <Route path={"/"} element={<HeaderPage isLoggedIn={isLoggedIn}></HeaderPage>}>
                         <Route path={"/cards-list"} element={<CardList></CardList>}></Route>
-                        {/* another pages */}
+                        <Route path={"/information"} element={<Information></Information>}></Route>
                     </Route>
                 </Routes> 
             ) : (
                 <Routes>
                     <Route path={"/"} element={<HeaderPage isLoggedIn={isLoggedIn}></HeaderPage>}>
-                        <Route path={"/authorization"} element={<Authorization></Authorization>}>                            
-                            <Route path={"/authorization/registration"} element={<RegistrationForm></RegistrationForm>}></Route>                            
-                            <Route path={"/authorization/login"} element={<LoginForm></LoginForm>}></Route>
-                        </Route>
-                        <Route path={"confirmation"} element={<RegistrationConfirmation></RegistrationConfirmation>}></Route>
+                        <Route path={"/auth"} element={<Authorization></Authorization>}></Route>
+                        <Route path={"/confirmation"} element={<RegistrationConfirmation></RegistrationConfirmation>}></Route>
                     </Route>
                 </Routes>
             )}

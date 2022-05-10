@@ -73,15 +73,6 @@ const DATA = [
         title: 'Title',
         author: 0
     },
-    {
-        id: Math.random(),
-        image: 'https://fakeimg.pl/200x100/282828/eae0d0/?retina=1',
-        text: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Mollitia odit nobis alias natus?',
-        date: '17.04.2022',
-        lesson_num: 0,
-        title: 'Title',
-        author: 0
-    }
 ]
 
 const CardList = () => {

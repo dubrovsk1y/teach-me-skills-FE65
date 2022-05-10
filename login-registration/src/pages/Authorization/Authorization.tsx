@@ -2,22 +2,24 @@ import React, { useState, FC } from "react";
 import './Authorization.css'
 import HeaderForm from "./HeaderForm";
 import { Theme, useThemeContext } from "../../context/themeModeContext";
-import { Outlet } from "react-router-dom";
+import RegistrationForm from "./RegistrationForm";
+import LoginForm from "./LoginForm";
 
 const Authorization = () => {
     const { theme } = useThemeContext()
     const isLightTheme = theme === Theme.Light
     const [tabName, setTabName] = useState('login')
+    const isLogin = tabName === 'login'
 
-    const onHeaderButtonClick = (name: string) => {
+    const changeLoginOrRegistration = (name: string) => {
         setTabName(name)
     }
 
     return (
         <div className={isLightTheme ? "authorization" : "authorization _dark"}> 
             <div className="authorization__container _container">               
-                <HeaderForm onHeaderClick={onHeaderButtonClick} activeTab={tabName}></HeaderForm>            
-                <Outlet></Outlet>
+                <HeaderForm onHeaderClick={changeLoginOrRegistration} activeTab={tabName}></HeaderForm>            
+                {isLogin ? <LoginForm></LoginForm> : <RegistrationForm onLoginClick={changeLoginOrRegistration}></RegistrationForm>}
             </div>
         </div>    
     )
