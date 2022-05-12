@@ -1,0 +1,8 @@
+.cardList__conatiner {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding-top: 100px;
+    padding-bottom: 100px;
+}

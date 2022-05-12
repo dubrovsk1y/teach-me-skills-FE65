@@ -1,0 +1,51 @@
+.information__container {
+    padding-top: 100px;
+}
+
+.information__title {
+    color: blue;
+    margin-bottom: 50px;
+}
+
+.information__buttons {
+    margin-bottom: 50px;
+}
+
+.tab {
+    background-color: gray;
+}
+
+.tab._active {
+    background-color: blue;
+}
+
+.tab:not(:last-child) {
+    margin-right: 10px;
+}
+
+.information__info {
+    background-color: white;
+    border-radius: 8px;
+}
+
+.information__info {
+    color: gray;
+    padding: 10px;
+}
+
+.info__text {
+    font-size: 18px;
+    margin-bottom: 50px;
+}
+
+.info__myList {
+    margin-bottom: 10px;
+}
+
+.info__list{
+    font-size: 18px;
+}
+
+.info__list li{
+    margin-left: 15px;
+}

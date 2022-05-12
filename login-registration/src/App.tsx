@@ -1,25 +1,22 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
+import Router from './pages/Router';
+import { ThemeModeProvider } from './context/ThemeModeProvider';
+import { Theme } from './context/themeModeContext';
 
-function App() {
+const App = () => {
+  const [theme, setTheme] = useState(Theme.Light)
+  const isLightTheme = theme === Theme.Light
+  const onChangeTheme = (value: Theme) => {
+    setTheme(value)
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeModeProvider theme={theme} onChangeTheme={onChangeTheme}>
+      <div className={isLightTheme ? "App" : "App _dark"}>
+            <Router></Router>
+      </div>
+    </ThemeModeProvider>
   );
 }
 
