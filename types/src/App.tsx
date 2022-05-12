@@ -184,4 +184,101 @@ const averageNumberOfPeople: AverageNumberOfPeople = (countries) => countries.re
 
 console.log(averageNumberOfPeople(countries))
 
+
+
+
+// ДЗ:
+
+type Users2 = Array<User2>
+
+type User2 = {
+  name: string
+  phone: string
+  email: string
+  animals?: string[]
+  cars?: string[]
+  hasChildren: boolean
+  hasEducation: boolean
+}
+
+const users2: Users2 = [
+  {
+    name: "Harry Felton",
+    phone: "(09) 897 33 33",
+    email: "felton@gmail.com",
+    animals: ["cat"],
+    cars: ["bmw"],
+    hasChildren: false,
+    hasEducation: true
+      
+  },
+  {
+    name: "May Sender",
+    phone: "(09) 117 33 33",
+    email: "sender22@gmail.com",
+    hasChildren: true,
+    hasEducation: true
+  },
+  {
+    name: "Henry Ford",
+    phone: "(09) 999 93 23",
+    email: "ford0@gmail.com",
+    cars: ["bmw", "audi"],
+    hasChildren: true,
+    hasEducation: false
+  }
+]
+
+// С выше приведенным массивом решить следующие задачи. Все функции и данные должны быть протипизированы:
+
+//     1. Создать строку из имен пользователей через запятую
+//     2. Посчитать общее количнство машин у пользователей
+//     3. Создать функцию, которая бы принимала массив пользователей и отфильтровывала пользователей на наличие образования
+//     4. Создать функцию, которая бы принимала массив пользователей и отфильтровывала пользователей на наличие животных
+//     5. Создать функцию, которая бы принимала массив пользователей и отдавала бы  строку с названиями марок автомобилей через запятую
+
+// 1. Создать строку из имен пользователей через запятую
+
+type NamesString = (users: Users2) => string
+
+const namesString: NamesString = (users) => {
+  let result = ''
+  users.forEach((item: User2) => result += `${item.name},`)
+  return result
+}
+
+console.log(namesString(users2))
+
+// 2. Посчитать общее количнство машин у пользователей
+
+type TotalNumberOfCars = (users: Users2) => number
+
+const totalNumberOfCars: TotalNumberOfCars = (users) => users.filter((item: User2) => item.cars).reduce((acc: string[], cur: any) => [...acc, ...(cur.cars)], []).length
+
+console.log(totalNumberOfCars(users2))
+
+// 3. Создать функцию, которая бы принимала массив пользователей и отфильтровывала пользователей на наличие образования
+
+type EducationFilter = (users: Users2) => Users2
+
+const educationFilter: EducationFilter = (users) => users.filter((item: User2) => item.hasEducation)
+
+console.log(educationFilter(users2))
+
+// 4. Создать функцию, которая бы принимала массив пользователей и отфильтровывала пользователей на наличие животных
+
+type PetsFilter = (users: Users2) => Users2
+
+const petsFilter: PetsFilter = (users) => users.filter((item: User2) => item.animals)
+
+console.log(petsFilter(users2))
+
+// 5. Создать функцию, которая бы принимала массив пользователей и отдавала бы  строку с названиями марок автомобилей через запятую
+
+type CarsString = (users: Users2) => string
+
+const carsString: CarsString = (users) => users.filter((item: User2) => item.cars).reduce((acc: string[], cur: any) => [...acc, ...(cur.cars)], []).join(',')
+
+console.log(carsString(users2))
+
 export default App;
