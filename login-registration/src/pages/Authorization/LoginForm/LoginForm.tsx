@@ -6,10 +6,19 @@ import checkForLowerСaseLetters from "../../../util/checkForLowerСaseLetters"
 import checkForUpperСaseLetters from "../../../util/checkForUpperСaseLetters"
 import checkForNumbers from "../../../util/checkForNubers"
 import checkForRuLetters from "../../../util/checkForRuLetters"
+import { useDispatch, useSelector } from "react-redux"
 
 const LoginForm = () => {
     const { theme } = useThemeContext()
     const isLightTheme = theme === Theme.Light
+    const dispatch = useDispatch()
+    const value = useSelector((state: any) => state.value)
+
+    const onClick = (isPlus: boolean) => {
+        const PLUS_ACTION = {type: 'counter/incremented'}
+        const MINUS_ACTION = {type: 'counter/decremented'}
+        dispatch(isPlus ? PLUS_ACTION : MINUS_ACTION)
+    }
 
     const validationForm = (email: string, password: string) => {
         
@@ -93,6 +102,9 @@ const LoginForm = () => {
 
                 <Button className={'authorizationForm__btn'} text={'Login'}></Button>
                 <p className="authorizationForm__footer">Forgot your password? <span>Reset password</span></p>
+                <Button onClick={() => onClick(true)} className={'authorizationForm__btn'} text={'ПЛЮС'}></Button>
+                <Button onClick={() => onClick(false)} className={'authorizationForm__btn'} text={'МИНУС'}></Button>
+                <div style={{fontSize: 40, fontWeight: 'bold', color: 'red'}}>{value}</div>
             </form>
     )
 }
