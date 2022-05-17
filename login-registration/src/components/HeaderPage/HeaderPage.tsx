@@ -3,12 +3,20 @@ import './HeaderPage.css'
 import { Outlet, useLocation } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import { Theme, useThemeContext } from "../../context/themeModeContext";
+import { useDispatch } from "react-redux";
+import { login, registartion } from "../../redux/actions/actions";
 
 const HeaderPage = (props: any) => {
     const { isLoggedIn } = props
     const [isMenuOpen, setMenuOpen] = useState(false)
     const { theme, onChangeTheme = () => {} } = useThemeContext()
     const isLightTheme = theme === Theme.Light
+    const dispatch = useDispatch()
+
+    const onClick = (isLogin: boolean) => {
+        isLogin ? dispatch(login()) : dispatch(registartion())
+    }
+
     const onClickTheme = () => {
         isLightTheme ? onChangeTheme(Theme.Dark) : onChangeTheme(Theme.Light)
     }
@@ -54,8 +62,8 @@ const HeaderPage = (props: any) => {
                                         ) : (
                                             <div className="menu__list">
                                                 <ul>
-                                                    <li><NavLink to="/auth">Login</NavLink></li>
-                                                    <li><NavLink to="/auth">Registration</NavLink></li>
+                                                    <li><NavLink to="/auth" onClick={() => onClick(true)}>Login</NavLink></li>
+                                                    <li><NavLink to="/auth" onClick={() => onClick(false)}>Registration</NavLink></li>
                                                 </ul>
                                             </div>
                                         )}  
