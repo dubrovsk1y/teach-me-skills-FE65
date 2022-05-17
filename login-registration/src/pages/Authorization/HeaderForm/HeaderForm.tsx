@@ -1,22 +1,27 @@
 import React, { FC } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { login, registartion } from "../../../redux/actions/actions";
+import { LOGIN } from "../../../redux/types";
 import './HeaderForm.css';
 
-type HeaderFormProps = {
-    onHeaderClick: (name: string) => void;
-    activeTab: string;
-}
+const HeaderForm = () => {
+    const dispatch = useDispatch()
+    const activeTab = useSelector((state: any) => state.activeTab)
 
-const HeaderForm: FC<HeaderFormProps> = ({activeTab, onHeaderClick}) => {
-    const isLoginActive = activeTab === 'login';
+    const isLoginActive = activeTab === LOGIN
+
+    const onClick = (isLogin: boolean) => {
+        dispatch(isLogin ? login() : registartion())
+    }
 
     return (
         <div className="headerForm">
             <h3 
-                onClick={() => onHeaderClick('login')} 
+                onClick={() => onClick(true)} 
                 className={isLoginActive ? 'title _title-active' : 'title'}>Login</h3>
             <span>|</span>
             <h3 
-                onClick={() => onHeaderClick('registration')} 
+                onClick={() => onClick(false)} 
                 className={isLoginActive ? 'title' : 'title _title-active'}>
                 Registration
             </h3>

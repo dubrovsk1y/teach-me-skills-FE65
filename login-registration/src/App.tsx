@@ -3,6 +3,8 @@ import './App.css';
 import Router from './pages/Router';
 import { ThemeModeProvider } from './context/ThemeModeProvider';
 import { Theme } from './context/themeModeContext';
+import { Provider } from 'react-redux';
+import { store } from './redux/store';
 
 const App = () => {
   const [theme, setTheme] = useState(Theme.Light)
@@ -12,11 +14,13 @@ const App = () => {
   }
 
   return (
-    <ThemeModeProvider theme={theme} onChangeTheme={onChangeTheme}>
-      <div className={isLightTheme ? "App" : "App _dark"}>
+    <Provider store={store}>
+      <ThemeModeProvider theme={theme} onChangeTheme={onChangeTheme}>
+        <div className={isLightTheme ? "App" : "App _dark"}>
             <Router></Router>
-      </div>
-    </ThemeModeProvider>
+        </div>
+      </ThemeModeProvider>
+    </Provider>
   );
 }
 

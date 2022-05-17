@@ -8,10 +8,14 @@ import checkForLowerСaseLetters from "../../../util/checkForLowerСaseLetters"
 import checkForUpperСaseLetters from "../../../util/checkForUpperСaseLetters"
 import checkForNumbers from "../../../util/checkForNubers"
 import checkForRuLetters from "../../../util/checkForRuLetters"
+import { useDispatch } from "react-redux"
+import { login } from "../../../redux/actions/actions"
 
-const RegistrationForm = ({onLoginClick}:any) => {
+const RegistrationForm = () => {
     const { theme } = useThemeContext()
     const isLightTheme = theme === Theme.Light
+
+    const dispatch = useDispatch()
 
     const [isFormActive, setFormActive] = useState(false)
     
@@ -82,6 +86,10 @@ const RegistrationForm = ({onLoginClick}:any) => {
     const onChangeConfirmPassword = (event: any) => {
         setPasswordConfirmValue(event.target.value)
         setValidation(validationForm(userNameValue, emailValue, passwordValue, event.target.value))
+    }
+
+    const onLoginClick = () => {
+        dispatch(login())
     }
 
     return (     
@@ -155,7 +163,7 @@ const RegistrationForm = ({onLoginClick}:any) => {
                 </p>
             </div>
             <Button className={'authorizationForm__btn'} text={'Registration'}></Button>
-            <p className="authorizationForm__footer">If you have account you can <span onClick={() => onLoginClick('login')}>login</span></p>
+            <p className="authorizationForm__footer">If you have account you can <span onClick={() => onLoginClick()}>login</span></p>
         </form>   
     ) 
 }

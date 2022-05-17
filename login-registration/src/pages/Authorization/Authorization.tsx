@@ -1,25 +1,23 @@
 import React, { useState, FC } from "react";
 import './Authorization.css'
 import HeaderForm from "./HeaderForm";
-import { Theme, useThemeContext } from "../../context/themeModeContext";
 import RegistrationForm from "./RegistrationForm";
 import LoginForm from "./LoginForm";
+import { Theme, useThemeContext } from "../../context/themeModeContext";
+import { useSelector } from "react-redux";
+import { LOGIN } from "../../redux/types";
 
 const Authorization = () => {
     const { theme } = useThemeContext()
     const isLightTheme = theme === Theme.Light
-    const [tabName, setTabName] = useState('login')
-    const isLogin = tabName === 'login'
-
-    const changeLoginOrRegistration = (name: string) => {
-        setTabName(name)
-    }
+    const activeTab = useSelector((state: any) => state.activeTab)
+    const isLoginActive = activeTab === LOGIN
 
     return (
         <div className={isLightTheme ? "authorization" : "authorization _dark"}> 
             <div className="authorization__container _container">               
-                <HeaderForm onHeaderClick={changeLoginOrRegistration} activeTab={tabName}></HeaderForm>            
-                {isLogin ? <LoginForm></LoginForm> : <RegistrationForm onLoginClick={changeLoginOrRegistration}></RegistrationForm>}
+                <HeaderForm></HeaderForm>            
+                {isLoginActive ? <LoginForm></LoginForm> : <RegistrationForm></RegistrationForm>}
             </div>
         </div>    
     )
