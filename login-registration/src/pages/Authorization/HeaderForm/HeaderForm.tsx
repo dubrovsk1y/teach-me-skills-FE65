@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { login, registartion } from "../../../redux/actions/actions";
 import { LOGIN } from "../../../redux/types";
@@ -6,7 +6,7 @@ import './HeaderForm.css';
 
 const HeaderForm = () => {
     const dispatch = useDispatch()
-    const activeTab = useSelector((state: any) => state.activeTab)
+    const activeTab = useSelector((state: any) => state.tabReducer.activeTab)
 
     const isLoginActive = activeTab === LOGIN
 

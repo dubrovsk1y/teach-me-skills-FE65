@@ -1,0 +1,12 @@
+.posts__container {
+    padding-top: 100px;
+}
+
+.posts__title {
+    color: blue;
+    margin-bottom: 50px;
+}
+
+.addPostBtn {
+    margin-bottom: 50px;
+}

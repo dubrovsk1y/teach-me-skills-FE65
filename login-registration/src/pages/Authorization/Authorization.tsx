@@ -1,4 +1,4 @@
-import React, { useState, FC } from "react";
+import React from "react";
 import './Authorization.css'
 import HeaderForm from "./HeaderForm";
 import RegistrationForm from "./RegistrationForm";
@@ -10,7 +10,7 @@ import { LOGIN } from "../../redux/types";
 const Authorization = () => {
     const { theme } = useThemeContext()
     const isLightTheme = theme === Theme.Light
-    const activeTab = useSelector((state: any) => state.activeTab)
+    const activeTab = useSelector((state: any) => state.tabReducer.activeTab)
     const isLoginActive = activeTab === LOGIN
 
     return (

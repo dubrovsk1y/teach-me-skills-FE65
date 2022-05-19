@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import './HeaderPage.css'
-import { Outlet, useLocation } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import { Theme, useThemeContext } from "../../context/themeModeContext";
 import { useDispatch } from "react-redux";
@@ -45,11 +45,11 @@ const HeaderPage = (props: any) => {
                                             <div className="menu__list">
                                                 <div className="menu__list__main">
                                                     <ul>
-                                                        <li><NavLink to="/cards-list">All posts</NavLink></li>
+                                                        <li><NavLink to="/all-posts">All posts</NavLink></li>
                                                     </ul>
                                                     <ul>
-                                                        <li><NavLink to="/cards-list">My posts</NavLink></li>
-                                                        <li><NavLink to="/cards-list">Add posts</NavLink></li>
+                                                        <li><NavLink to="/my-posts">My posts</NavLink></li>
+                                                        <li><NavLink to="/add-posts">Add posts</NavLink></li>
                                                     </ul>
                                                     <ul>
                                                         <li><NavLink to="/information">Information</NavLink></li>
