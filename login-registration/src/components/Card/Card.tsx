@@ -19,7 +19,7 @@ const Card: FC<CardProps> = ({data, onCardClick}) => {
 
 
     const onHoverCard = (data: CardType | null) => {
-        data ? dispatch(setSelectedPost(data)) : dispatch(setSelectedPost(null))
+        dispatch(setSelectedPost(data))
         // console.log(selectedCard)
         console.log(data)
     }
