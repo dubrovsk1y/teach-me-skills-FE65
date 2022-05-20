@@ -24,5 +24,5 @@ export const { setSelectedPost } = postSlice.actions
 export default postSlice.reducer
 
 export const PostSelectors = {
-    getSelectedPost: (state: any) => state.posts.selectedPost,
+    getSelectedPost: (state: any) => state.post.selectedPost,
 }

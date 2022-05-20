@@ -9,7 +9,7 @@
 }
 
 .post__card {
-    width: 820px;
+    width: 720px;
     padding: 10px;
     border-radius: 9px;
     background-color: #FFFFFF;
@@ -23,8 +23,8 @@
 }
 
 .post__card__image img {
-    width: 800;
-    height: 400px;
+    width: 700;
+    height: 500px;
 }
 
 .post__card__title {

@@ -8,38 +8,34 @@ import { Card as CardType} from "../../common/types";
 
 type CardProps = {
     data: CardType
-    onCardClick?: () => void
 }
 
-const Card: FC<CardProps> = ({data, onCardClick}) => {
+const Card: FC<CardProps> = ({ data }) => {
     const { image, title, text, date } = data
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    // const selectedCard = useSelector(PostSelectors.getSelectedPost);
-
+    const selectedCard = useSelector(PostSelectors.getSelectedPost);
 
     const onHoverCard = (data: CardType | null) => {
-        dispatch(setSelectedPost(data))
-        // console.log(selectedCard)
-        console.log(data)
+        dispatch(setSelectedPost(data))    
     }
 
     return (
-        <div className="card" onMouseEnter={() => onHoverCard(data)} onMouseLeave={() => onHoverCard(null)} onClick={() => navigate('/post', {state: {image, title, text, date}})}>
+        <div className="card" onMouseEnter={() => onHoverCard(data)} onMouseLeave={() => onHoverCard(null)} onClick={() => navigate('/post')}>
             <div className="card__image">
-                <img src={image} alt="image" width="260" height="100" />
+                <img src={image ?? 'https://img5.goodfon.ru/wallpaper/nbig/d/11/abstraktsiia-fon-tsvet-chernyi.jpg'} alt="image" width="260" height="100" />
             </div>
             <h3 className="card__title">{title}</h3>
             <p className="card__text">{text}</p>
             <p className="card__date">{date}</p>
             <Popup 
-                trigger={<span onClick={onCardClick} className="material-symbols-outlined card__visibility"> visibility </span>} 
+                trigger={<span className="material-symbols-outlined card__visibility"> visibility </span>} 
                 position={'top center'}
                 on={['hover', 'focus']}
                 >
                 
                 <div className="popup__image">
-                    <img src={image} alt="" />
+                    <img src={selectedCard?.image ?? 'https://img5.goodfon.ru/wallpaper/nbig/d/11/abstraktsiia-fon-tsvet-chernyi.jpg'} alt="" />
                 </div>
                 <div className="popup__btns">            
                     <span className="material-symbols-outlined chevron _left"> chevron_left </span> 
