@@ -4,5 +4,6 @@ export type Card = {
     title: string;
     text: string;
     date: string;
-    isBig?: boolean;
+    likeStatus: null | string;
+    save: boolean;
 }

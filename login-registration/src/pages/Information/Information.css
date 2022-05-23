@@ -7,20 +7,10 @@
     margin-bottom: 50px;
 }
 
-.information__buttons {
+.information__tabs {
+    display: flex;
+    gap: 50px;
     margin-bottom: 50px;
-}
-
-.tab {
-    background-color: gray;
-}
-
-.tab._active {
-    background-color: blue;
-}
-
-.tab:not(:last-child) {
-    margin-right: 10px;
 }
 
 .information__info {
@@ -34,18 +24,5 @@
 }
 
 .info__text {
-    font-size: 18px;
-    margin-bottom: 50px;
-}
-
-.info__myList {
-    margin-bottom: 10px;
-}
-
-.info__list{
-    font-size: 18px;
-}
-
-.info__list li{
-    margin-left: 15px;
+    font-size: 22px;
 }

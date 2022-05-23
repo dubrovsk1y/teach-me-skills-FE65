@@ -91,7 +91,7 @@ const LoginForm = () => {
                     </p>
                 </div>
 
-                <Button className={'authorizationForm__btn'} text={'Login'}></Button>
+                <Button className={'default-button authorizationForm__btn'} text={'Login'}></Button>
                 <p className="authorizationForm__footer">Forgot your password? <span>Reset password</span></p>
             </form>
     )

@@ -162,7 +162,7 @@ const RegistrationForm = () => {
                     {isFormActive ? (validation?.confirmPassword ? validation.confirmPassword : '') : ''}    
                 </p>
             </div>
-            <Button className={'authorizationForm__btn'} text={'Registration'}></Button>
+            <Button className={'default-button authorizationForm__btn'} text={'Registration'}></Button>
             <p className="authorizationForm__footer">If you have account you can <span onClick={() => onLoginClick()}>login</span></p>
         </form>   
     ) 

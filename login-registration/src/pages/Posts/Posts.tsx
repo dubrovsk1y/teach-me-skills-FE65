@@ -1,9 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import './Posts.css'
+import { useDispatch, useSelector } from "react-redux";
+import { loadData, PostSelectors } from "../../redux/reducers/postReducer";
+import { setAllPostsTab, TabsSelectors } from "../../redux/reducers/tabsReducer";
 import CardList from "../../components/CardList";
 import Button from "../../components/Button";
+import Tab from "../../components/Tab";
+import classNames from "classnames"
+import { Theme, useThemeContext } from "../../context/themeModeContext";
 
-const DATA = [
+const MOCK_DATA = [
     {
         id: Math.random(),
         image: 'https://pw.artfile.me/wallpaper/24-12-2012/650x366/3d-grafika-abstract-abstrakcii-ostrye-li-692215.jpg',
@@ -77,12 +83,33 @@ const DATA = [
 ]
 
 const Posts = () => {
+    const { theme } = useThemeContext()
+    const isLightTheme = theme === Theme.Light
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch(loadData(MOCK_DATA))
+    }, [])
+
+    const activeTab = useSelector(TabsSelectors.getAllPostsTab)
+    const cardsList = useSelector((state) => PostSelectors.getCards(state, activeTab))
+
+    const onTabClick = (tab: string) => {
+        dispatch(setAllPostsTab(tab))
+    }
+
     return (
         <div className="posts">
             <div className="posts__container _container">
-                <h1 className="posts__title">My posts</h1>
-                <Button className="addPostBtn" text={'Add post'}></Button>            
-                <CardList data={DATA}></CardList>
+                <h1 className="posts__title">All posts</h1>
+                <Button className={classNames("default-button", "addPostBtn", {["_dark"]: !isLightTheme})} text={'Add post'}></Button>
+                <div className="posts__tabs">
+                    <Tab onClick={() => onTabClick('ALL_POSTS')} className={classNames('tab', {['_active']: activeTab === 'ALL_POSTS'})} text={'All'}></Tab>
+                    <Tab onClick={() => onTabClick('LIKED_POSTS')} className={classNames('tab', {['_active']: activeTab === 'LIKED_POSTS'})} text={<span className="material-symbols-outlined"> thumb_up </span>}></Tab>
+                    <Tab onClick={() => onTabClick('DISLIKED_POSTS')} className={classNames('tab', {['_active']: activeTab === 'DISLIKED_POSTS'})} text={<span className="material-symbols-outlined"> thumb_down </span>}></Tab>
+                    <Tab onClick={() => onTabClick('SAVED_POSTS')} className={activeTab === 'SAVED_POSTS' ? 'tab _active' : 'tab'} text={<span className="material-symbols-outlined"> bookmark </span>}></Tab>
+                </div>            
+                <CardList data={cardsList}></CardList>
             </div>
         </div>
     )

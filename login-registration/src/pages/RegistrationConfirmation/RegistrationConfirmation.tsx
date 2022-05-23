@@ -11,7 +11,7 @@ const RegistrationConfirmation = () => {
     const location: any = useLocation()
     const onHomeClick = () => {
         localStorage.setItem("isLoggedIn", 'true')
-        window.location.replace("cards-list")
+        window.location.replace("/all-posts")
     }
     return (
         <div className="registrationConfirmationWrapper">
@@ -19,7 +19,7 @@ const RegistrationConfirmation = () => {
             <p className={isLightTheme ? "registrationConfirmation__text" : "registrationConfirmation__text _dark"}>
                 Please activate your account with the activation link in the email <a href="#.">{location?.state?.emailValue ?? ""}</a> Please check your email
             </p>
-            <Button className={'registrationConfirmation__btnHome'} text={'Home'} onClick={onHomeClick}></Button>
+            <Button className={'default-button registrationConfirmation__btnHome'} text={'Home'} onClick={onHomeClick}></Button>
         </div>
     )
 }

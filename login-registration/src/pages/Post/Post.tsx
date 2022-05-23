@@ -4,19 +4,19 @@ import { useSelector } from "react-redux";
 import { PostSelectors } from "../../redux/reducers/postReducer";
 
 const Post = () => {
-    const selectedCard = useSelector(PostSelectors.getSelectedPost)
+    const selectedPost = useSelector(PostSelectors.getSelectedPost)
 
     return ( 
         <div className="post">
             <div className="post__container _container">
-                <h1 className="post__title">{selectedCard.title ?? 'Content title'}</h1>
+                <h1 className="post__title">{selectedPost?.title ?? 'Title'}</h1>
                 <div className="post__card">
                     <div className="post__card__image">
-                        <img src={selectedCard?.image ?? 'https://img5.goodfon.ru/wallpaper/nbig/d/11/abstraktsiia-fon-tsvet-chernyi.jpg'} alt="image"/>
+                        <img src={selectedPost?.image ?? 'https://img5.goodfon.ru/wallpaper/nbig/d/11/abstraktsiia-fon-tsvet-chernyi.jpg'} alt="image"/>
                     </div>
-                    <h3 className="post__card__title">{selectedCard.title ?? 'Content title'}</h3>
-                    <p className="post__card__text">{selectedCard.text ?? 'Content text'}</p>
-                    <p className="post__card__date">{selectedCard.date ?? '01.01.2001'}</p>
+                    <h3 className="post__card__title">{selectedPost?.title ?? 'Title'}</h3>
+                    <p className="post__card__text">{selectedPost?.text ?? 'Text'}</p>
+                    <p className="post__card__date">{selectedPost?.date ?? '01.01.2022'}</p>
                 </div>            
             </div>
         </div>

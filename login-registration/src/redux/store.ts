@@ -2,6 +2,7 @@ import { LOGIN, REGISTRATION } from "./types";
 import { configureStore, combineReducers } from '@reduxjs/toolkit'
 import postReducer from "./reducers/postReducer";
 import authReducer from "./reducers/authReducer";
+import tabsReducer from "./reducers/tabsReducer";
 
 function tabReducer(state = { activeTab: LOGIN }, action: any) {
     if (action.type === LOGIN) {
@@ -13,6 +14,7 @@ function tabReducer(state = { activeTab: LOGIN }, action: any) {
 
 const rootReducer = combineReducers({
     tabReducer,
+    tabs: tabsReducer,
     post: postReducer,
     auth: authReducer,
 })
