@@ -6,9 +6,12 @@ import RegistrationConfirmation from "../RegistrationConfirmation";
 import Information from "../Information";
 import Posts from "../Posts";
 import Post from "../Post";
+import { useSelector } from "react-redux";
+import { AuthSelectors } from "../../redux/reducers/authReducer";
 
 const Router = () => {
-    const isLoggedIn = localStorage.getItem("isLoggedIn")
+    const isLoggedIn = useSelector(AuthSelectors.getAuthStatus)
+    
     return (
         <BrowserRouter>
             {isLoggedIn ? (

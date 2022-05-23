@@ -1,17 +1,21 @@
 import React from "react";
 import './RegistrationConfirmation.css'
 import Button from "../../components/Button";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useThemeContext, Theme } from "../../context/themeModeContext";
+import { useDispatch } from "react-redux";
+import { setAuthStatus } from "../../redux/reducers/authReducer";
 
 const RegistrationConfirmation = () => {
     const { theme } = useThemeContext()
     const isLightTheme = theme === Theme.Light
-
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
     const location: any = useLocation()
+
     const onHomeClick = () => {
-        localStorage.setItem("isLoggedIn", 'true')
-        window.location.replace("/all-posts")
+        dispatch(setAuthStatus(true))
+        navigate('/all-posts')
     }
     return (
         <div className="registrationConfirmationWrapper">

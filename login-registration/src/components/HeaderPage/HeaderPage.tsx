@@ -5,6 +5,7 @@ import { NavLink } from "react-router-dom";
 import { Theme, useThemeContext } from "../../context/themeModeContext";
 import { useDispatch } from "react-redux";
 import { login, registartion } from "../../redux/actions/actions";
+import { setAuthStatus } from "../../redux/reducers/authReducer";
 
 const HeaderPage = (props: any) => {
     const { isLoggedIn } = props
@@ -26,8 +27,7 @@ const HeaderPage = (props: any) => {
     }
 
     const onLogOutClick = () => {
-        localStorage.removeItem("isLoggedIn")
-        window.location.replace("/auth")
+        dispatch(setAuthStatus(false))
     }
 
     return (
@@ -56,7 +56,7 @@ const HeaderPage = (props: any) => {
                                                     </ul>
                                                 </div>
                                                 <ul>
-                                                    <li><NavLink onClick={onLogOutClick} to="/authorization">Log out</NavLink></li>
+                                                    <li><NavLink onClick={onLogOutClick} to="/auth">Log out</NavLink></li>
                                                 </ul>
                                             </div>
                                         ) : (
