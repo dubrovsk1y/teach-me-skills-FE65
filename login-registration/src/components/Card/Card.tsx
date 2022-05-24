@@ -26,13 +26,7 @@ const Card: FC<CardProps> = ({ data }) => {
     const handleButtonClick = (action: string, event: any) => {
         event.stopPropagation() 
         if (action === 'like' || action === 'dislike') {
-            if (!likeStatus) {
-                dispatch(setLikePost({id, value: action}))
-            } else if (likeStatus === action) {
-                dispatch(setLikePost({id, value: null}))
-            } else {
-                dispatch(setLikePost({id, value: action}))
-            }           
+            dispatch(setLikePost({id, value: likeStatus === action ? null : action}))
         } else if (action === 'save') {
             dispatch(setSavedPost({id, value: !save}))
         } 
