@@ -36,15 +36,15 @@ const postSlice = createSlice({
     },
     loadPost: (state: any, action) => {},
     setLikePost: (state: any, action) => {
-      const card = state.cardsList.find((item: any) => item.id === action.payload.id);
-      if (card) {
-        card.likeStatus = action.payload.value;
+      const post = state.postsList.find((item: any) => item.id === action.payload.id);
+      if (post) {
+        post.likeStatus = action.payload.value;
       }
     },
     setSavedPost: (state: any, action) => {
-      const card = state.cardsList.find((item: any) => item.id === action.payload.id);
-      if (card) {
-        card.save = action.payload.value;
+      const post = state.postsList.find((item: any) => item.id === action.payload.id);
+      if (post) {
+        post.save = action.payload.value;
       }
     },
     setSelectedImage: (state: any, action) => {
