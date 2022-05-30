@@ -8,8 +8,8 @@ const getPosts = () => {
   return API.get("/blog/posts/");
 };
 
-const getSinglePost = (id: string) => {
+const getSelectedPost = (id: string) => {
   return API.get(`/blog/posts/${id}/`);
 };
 
-export { getPosts, getSinglePost };
+export { getPosts, getSelectedPost };

@@ -6,6 +6,7 @@ type PostState = {
   selectedImage: string | Array<string> | null;
   postsList: [];
   postsLoading: boolean;
+  selectedPostLoading: boolean;
 };
 
 const initialState: PostState = {
@@ -13,6 +14,7 @@ const initialState: PostState = {
   selectedImage: null,
   postsList: [],
   postsLoading: false,
+  selectedPostLoading: false,
 };
 
 const postSlice = createSlice({
@@ -51,6 +53,9 @@ const postSlice = createSlice({
     setPostsLoading: (state, action) => {
       state.postsLoading = action.payload;
     },
+    setSelectedPostLoading: (state, action) => {
+      state.selectedPostLoading = action.payload;
+    },
   },
 });
 
@@ -63,6 +68,7 @@ export const {
   setSelectedImage,
   setPosts,
   setPostsLoading,
+  setSelectedPostLoading,
 } = postSlice.actions;
 
 export default postSlice.reducer;
@@ -86,4 +92,5 @@ export const PostSelectors = {
     }
   },
   getPostsLoading: (state: any) => state.post.postsLoading,
+  getSelectedPostLoading: (state: any) => state.post.selectedPostLoading,
 };

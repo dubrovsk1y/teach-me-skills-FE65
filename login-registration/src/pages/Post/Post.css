@@ -9,7 +9,7 @@
 }
 
 .post__card {
-  width: 720px;
+  width: min-content;
   padding: 10px;
   border-radius: 9px;
   background-color: #ffffff;
@@ -22,10 +22,10 @@
   margin-bottom: 20px;
 }
 
-.post__card__image img {
+/* .post__card__image img {
   width: 700;
   height: 500px;
-}
+} */
 
 .post__card__title {
   margin-bottom: 20px;
