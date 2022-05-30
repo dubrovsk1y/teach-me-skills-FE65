@@ -1,59 +1,59 @@
 .authorization__container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-top: 100px;
-    gap: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 100px;
+  gap: 50px;
 }
 
 .authorizationForm {
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    max-width: 300px;
-    gap: 30px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  max-width: 300px;
+  gap: 30px;
 }
 
 .authorizationForm__input {
-    margin-top: 5px;
+  margin-top: 5px;
 }
 
 .authorizationForm__input._dark {
-    border-color: blue;
+  border-color: blue;
 }
 
 .authorizationForm label {
-    font-weight: bold;
-    display: block;
-    margin-bottom: 5px;
+  font-weight: bold;
+  display: block;
+  margin-bottom: 5px;
 }
 
 ._dark label {
-    color: white;
+  color: white;
 }
 
 .authorizationForm__validText {
-    font-weight: bold;
-    color: red;
-    min-height: 20px;
+  font-weight: bold;
+  color: red;
+  min-height: 20px;
 }
 
 .authorizationForm__btn {
-    width: 300px;
+  width: 300px;
 }
 
 .authorizationForm__footer {
-    font-size: 18px;
-    align-self: center;
-    color: gray;  
+  font-size: 18px;
+  align-self: center;
+  color: gray;
 }
 
 .authorizationForm__footer span {
-    font-weight: bold;
-    color: blue;
-    cursor: pointer;
+  font-weight: bold;
+  color: blue;
+  cursor: pointer;
 }
 
 .authorizationForm__footer span:hover {
-    color: rgb(63, 63, 255);
+  color: rgb(63, 63, 255);
 }

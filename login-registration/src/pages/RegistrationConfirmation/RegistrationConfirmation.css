@@ -1,40 +1,40 @@
 .registrationConfirmationWrapper {
-    padding-top: 100px;
-    max-width: 450px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    gap: 50px;
-    align-items: center;
+  padding-top: 100px;
+  max-width: 450px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  align-items: center;
 }
 
 .registrationConfirmation__title {
-    color: blue;
-    font-weight: bold;
-    font-size: 30px;
-    letter-spacing: 0.1em;
+  color: blue;
+  font-weight: bold;
+  font-size: 30px;
+  letter-spacing: 0.1em;
 }
 
 .registrationConfirmation__text {
-    font-size: 18px;
-    text-align: center;
+  font-size: 18px;
+  text-align: center;
 }
 
 .registrationConfirmation__text._dark {
-    color: gray;
+  color: gray;
 }
 
 .registrationConfirmation__text a {
-    text-decoration: none;
-    color: blue;
-    font-weight: bold;
-    transition: 0.3s;
+  text-decoration: none;
+  color: blue;
+  font-weight: bold;
+  transition: 0.3s;
 }
 
-.registrationConfirmation__text a:hover {    
-    color: rgb(63, 63, 255);
+.registrationConfirmation__text a:hover {
+  color: rgb(63, 63, 255);
 }
 
 .registrationConfirmation__btnHome {
-    width: 300px;
+  width: 300px;
 }

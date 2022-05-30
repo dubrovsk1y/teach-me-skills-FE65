@@ -1,23 +1,39 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-const initialState = {
-    authStatus: false
-}
+export type RegisterUser = {
+  name?: string;
+  email?: string;
+  password?: string;
+};
+
+export type AuthReduserStateType = {
+  authStatus: boolean;
+  registerUser: RegisterUser;
+};
+
+const initialState: AuthReduserStateType = {
+  authStatus: !!localStorage.getItem("authStatus"),
+  registerUser: {},
+};
 
 const authSlice = createSlice({
-    name: 'auth',
-    initialState,
-    reducers: {
-        setAuthStatus: (state, action) => {
-            state.authStatus = action.payload
-        },
+  name: "auth",
+  initialState,
+  reducers: {
+    registerUser: (state: any, action: PayloadAction<RegisterUser>) => {
+      state.registerUser = action.payload;
     },
-})
+    setAuthStatus: (state: any, action: PayloadAction<boolean>) => {
+      state.authStatus = action.payload;
+    },
+  },
+});
 
-export const { setAuthStatus } = authSlice.actions
+export const { setAuthStatus, registerUser } = authSlice.actions;
 
-export default authSlice.reducer
+export default authSlice.reducer;
 
 export const AuthSelectors = {
-    getAuthStatus: (state: any) => state.auth.authStatus
-}
+  getAuthStatus: (state: any) => state.auth.authStatus,
+  getRegisterUser: (state: any) => state.auth.registerUser,
+};

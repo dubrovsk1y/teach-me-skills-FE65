@@ -1,47 +1,47 @@
 .post__container {
-    padding-top: 100px;
-    padding-bottom: 100px;
+  padding-top: 100px;
+  padding-bottom: 100px;
 }
 
 .post__title {
-    margin-bottom: 50px;
-    color: blue;
+  margin-bottom: 50px;
+  color: blue;
 }
 
 .post__card {
-    width: 720px;
-    padding: 10px;
-    border-radius: 9px;
-    background-color: #FFFFFF;
-    border: 1px solid blue;
+  width: 720px;
+  padding: 10px;
+  border-radius: 9px;
+  background-color: #ffffff;
+  border: 1px solid blue;
 }
 
 .post__card__image {
-    border-radius: 9px;
-    overflow: hidden;
-    margin-bottom: 20px;
+  border-radius: 9px;
+  overflow: hidden;
+  margin-bottom: 20px;
 }
 
 .post__card__image img {
-    width: 700;
-    height: 500px;
+  width: 700;
+  height: 500px;
 }
 
 .post__card__title {
-    margin-bottom: 20px;
-    font-weight: 400;
-    letter-spacing: 0.1em;
-    font-size: 22px;
+  margin-bottom: 20px;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  font-size: 22px;
 }
 
 .post__card__text {
-    margin-bottom: 20px;
-    font-size: 18px;
-    color: gray;
+  margin-bottom: 20px;
+  font-size: 18px;
+  color: gray;
 }
 
 .post__card__date {
-    font-size: 18px;
-    color: skyblue;
-    font-weight: bold;
+  font-size: 18px;
+  color: skyblue;
+  font-weight: bold;
 }

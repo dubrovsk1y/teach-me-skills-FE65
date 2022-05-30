@@ -1,29 +1,29 @@
 .default-button {
-    border: none;
-    padding: 10px;
-    color: blue;
-    cursor: pointer;
-    border: 3px solid blue;
-    border-radius: 20px;
-    font-size: 16px;
-    transition: 0.3s;
-    min-width: 100px;
-    font-weight: bold;
-    letter-spacing: 0.06em;
+  border: none;
+  padding: 10px;
+  color: blue;
+  cursor: pointer;
+  border: 3px solid blue;
+  border-radius: 20px;
+  font-size: 16px;
+  transition: 0.3s;
+  min-width: 100px;
+  font-weight: bold;
+  letter-spacing: 0.06em;
 }
 
 .default-button:hover {
-    color: white;
-    background-color: blue;
-} 
+  color: white;
+  background-color: blue;
+}
 
 .default-button._dark {
-    color: white;
-    background-color: black;
-    border-color: white;
+  color: white;
+  background-color: black;
+  border-color: white;
 }
 
 .default-button._dark:hover {
-    color: blue;
-    border-color: blue;
+  color: blue;
+  border-color: blue;
 }

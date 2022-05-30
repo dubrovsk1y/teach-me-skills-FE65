@@ -1,27 +1,27 @@
 .headerForm {
-    display: flex;
-    align-items: center;
-    gap: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .headerForm span {
-    font-weight: bold;
-    font-size: 30px;
+  font-weight: bold;
+  font-size: 30px;
 }
 
 .title {
-    color: gray;
-    font-weight: bold;
-    font-size: 30px;
-    letter-spacing: 0.1em;
-    transition: 0.3s;
-    cursor: pointer;
+  color: gray;
+  font-weight: bold;
+  font-size: 30px;
+  letter-spacing: 0.1em;
+  transition: 0.3s;
+  cursor: pointer;
 }
 
 .title:hover {
-    color: blue;
+  color: blue;
 }
 
 ._title-active {
-    color: blue;
+  color: blue;
 }

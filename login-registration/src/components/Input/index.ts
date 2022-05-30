@@ -1,4 +1,4 @@
-export { default } from './Input'
+export { default } from "./Input";
 
 // import Input from './Input'
 

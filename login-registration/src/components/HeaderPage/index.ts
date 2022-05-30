@@ -1,3 +1,3 @@
 import HeaderPage from "./HeaderPage";
 
-export default HeaderPage
+export default HeaderPage;
