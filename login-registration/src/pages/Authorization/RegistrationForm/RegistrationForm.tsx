@@ -52,17 +52,29 @@ const RegistrationForm = () => {
   );
   const navigate = useNavigate();
 
+  // const uuid = "uuid";
+  // const token = "token";
+
   const onSubmitForm = (event: any) => {
     event.preventDefault();
     setFormActive(true);
-
+    // const callback = () => {
+    //   // window.location.href = `/activate/${id}`;
+    //   navigate(`/activate`, {
+    //     state: {
+    //       emailValue,
+    //     },
+    //   });
+    // };
     if (!validation) {
-      dispatch(registerUser({ name: userNameValue, email: emailValue, password: passwordValue }));
-      navigate("/confirmation", {
-        state: {
-          emailValue,
-        },
-      });
+      dispatch(
+        registerUser({
+          name: userNameValue,
+          email: emailValue,
+          password: passwordValue,
+          // callback,
+        })
+      );
       setFormActive(false);
       setUserNameValue("");
       setEmailValue("");

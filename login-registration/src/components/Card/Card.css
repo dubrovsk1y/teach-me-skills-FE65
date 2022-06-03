@@ -55,7 +55,7 @@
   padding: 10px;
 }
 .popup-arrow {
-  color: blue;
+  color: ffffff;
 }
 [role="tooltip"].popup-content {
   box-shadow: rgba(0, 0, 0, 0.16) 0px 0px 3px;
@@ -91,7 +91,7 @@
 }
 
 .chevron:hover {
-  color: blue;
+  color: ffffff;
 }
 
 /* animation */

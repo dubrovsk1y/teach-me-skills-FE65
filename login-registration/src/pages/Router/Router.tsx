@@ -28,7 +28,10 @@ const Router = () => {
         <Routes>
           <Route path={"/"} element={<HeaderPage isLoggedIn={isLoggedIn}></HeaderPage>}>
             <Route path={"/auth"} element={<Authorization></Authorization>}></Route>
-            <Route path={"/confirmation"} element={<RegistrationConfirmation></RegistrationConfirmation>}></Route>
+            <Route
+              path={"/activate/:uuid/:token"}
+              element={<RegistrationConfirmation></RegistrationConfirmation>}
+            ></Route>
           </Route>
           <Route path="*" element={<Navigate to={"/"} replace></Navigate>}></Route>
         </Routes>

@@ -30,11 +30,9 @@ const postSlice = createSlice({
         };
       });
     },
-    loadData: (state: any, action) => {},
     setSelectedPost: (state: any, action) => {
       state.selectedPost = action.payload;
     },
-    loadPost: (state: any, action) => {},
     setLikePost: (state: any, action) => {
       const post = state.postsList.find((item: any) => item.id === action.payload.id);
       if (post) {
@@ -56,6 +54,8 @@ const postSlice = createSlice({
     setSelectedPostLoading: (state, action) => {
       state.selectedPostLoading = action.payload;
     },
+    loadPost: (state: any, action) => {},
+    loadData: (state: any, action) => {},
   },
 });
 

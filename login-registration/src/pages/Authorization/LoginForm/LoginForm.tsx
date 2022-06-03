@@ -15,19 +15,13 @@ const LoginForm = () => {
     const validErrors: { email?: string; password?: string } = {};
 
     if (!email.trim()) validErrors.email = "This is a required field";
-    if (checkForRuLetters(email))
-      validErrors.email = "Email must not contain Russian letters";
+    if (checkForRuLetters(email)) validErrors.email = "Email must not contain Russian letters";
 
-    if (!checkForLowerСaseLetters(password))
-      validErrors.password = "Password must contain lower case letters";
-    if (!checkForUpperСaseLetters(password))
-      validErrors.password = "Password must contain capital letters";
-    if (!checkForNumbers(password))
-      validErrors.password = "Password must contain numbers";
-    if (checkForRuLetters(password))
-      validErrors.password = "Password must not contain Russian letters";
-    if (password.length < 8 || password.length > 15)
-      validErrors.password = "Password length must be 8 - 15 characters";
+    if (!checkForLowerСaseLetters(password)) validErrors.password = "Password must contain lower case letters";
+    if (!checkForUpperСaseLetters(password)) validErrors.password = "Password must contain capital letters";
+    if (!checkForNumbers(password)) validErrors.password = "Password must contain numbers";
+    if (checkForRuLetters(password)) validErrors.password = "Password must not contain Russian letters";
+    if (password.length < 8 || password.length > 15) validErrors.password = "Password length must be 8 - 15 characters";
 
     return Object.keys(validErrors).length ? validErrors : null;
   };
@@ -36,9 +30,7 @@ const LoginForm = () => {
   const [emailValue, setEmailValue] = useState("");
   const [passwordValue, setPasswordValue] = useState("");
 
-  const [validation, setValidation] = useState(
-    validationForm(emailValue, passwordValue)
-  );
+  const [validation, setValidation] = useState(validationForm(emailValue, passwordValue));
 
   const onLoginSubmitForm = (event: any) => {
     event.preventDefault();
@@ -69,11 +61,7 @@ const LoginForm = () => {
             onChange={onChangeEmail}
             value={emailValue}
             placeholder={"Enter your email"}
-            className={
-              isLightTheme
-                ? "authorizationForm__input"
-                : "authorizationForm__input _dark"
-            }
+            className={isLightTheme ? "authorizationForm__input" : "authorizationForm__input _dark"}
             type={"email"}
             id={"email"}
           ></Input>
@@ -90,28 +78,17 @@ const LoginForm = () => {
             onChange={onChangePassword}
             value={passwordValue}
             placeholder={"Enter your password"}
-            className={
-              isLightTheme
-                ? "authorizationForm__input"
-                : "authorizationForm__input _dark"
-            }
+            className={isLightTheme ? "authorizationForm__input" : "authorizationForm__input _dark"}
             type={"password"}
             id={"password"}
           ></Input>
         </label>
         <p className="authorizationForm__validText">
-          {isFormActive
-            ? validation?.password
-              ? validation.password
-              : ""
-            : ""}
+          {isFormActive ? (validation?.password ? validation.password : "") : ""}
         </p>
       </div>
 
-      <Button
-        className={"default-button authorizationForm__btn"}
-        text={"Login"}
-      ></Button>
+      <Button className={"default-button authorizationForm__btn"} text={"Login"}></Button>
       <p className="authorizationForm__footer">
         Forgot your password? <span>Reset password</span>
       </p>
