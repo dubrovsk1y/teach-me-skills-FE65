@@ -1,22 +1,27 @@
-import React, { useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import "./HeaderPage.css";
 import { Outlet } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import { Theme, useThemeContext } from "../../context/themeModeContext";
-import { useDispatch } from "react-redux";
-import { login, registartion } from "../../redux/actions/actions";
+import { useDispatch, useSelector } from "react-redux";
 import { setAuthStatus } from "../../redux/reducers/authReducer";
+import { setAuthorizarionTab } from "../../redux/reducers/tabsReducer";
 import classNames from "classnames";
+import { loadUserInfoData, UserSelectors } from "../../redux/reducers/userReducer";
 
-const HeaderPage = (props: any) => {
-  const { isLoggedIn } = props;
+type HeaderPageProps = {
+  isLoggedIn: boolean;
+};
+
+const HeaderPage: FC<HeaderPageProps> = ({ isLoggedIn }) => {
+  const dispatch = useDispatch();
   const [isMenuOpen, setMenuOpen] = useState(false);
   const { theme, onChangeTheme = () => {} } = useThemeContext();
   const isLightTheme = theme === Theme.Light;
-  const dispatch = useDispatch();
+  const { username } = useSelector(UserSelectors.getUserInfo);
 
   const onClick = (isLogin: boolean) => {
-    isLogin ? dispatch(login()) : dispatch(registartion());
+    dispatch(setAuthorizarionTab(isLogin ? "LOGIN" : "REGISTRATION"));
     setMenuOpen(false);
   };
 
@@ -31,12 +36,11 @@ const HeaderPage = (props: any) => {
   const onLogOutClick = () => {
     dispatch(setAuthStatus(false));
     setMenuOpen(false);
-    localStorage.removeItem("authStatus");
   };
 
   return (
     <div>
-      <header className={isLightTheme ? "header" : "header _dark"}>
+      <header className={classNames("header", { ["_dark"]: !isLightTheme })}>
         <div className="header__container _container">
           <div className="header__group">
             <div className="header__menu menu">
@@ -102,7 +106,7 @@ const HeaderPage = (props: any) => {
                 </div>
               </nav>
             </div>
-            {isLoggedIn ? <h3 className="header__title">Username</h3> : ""}
+            {isLoggedIn ? <h3 className="header__title">{username}</h3> : ""}
           </div>
           <div className="checkbox__group">
             <input type="checkbox" className="checkbox" id="checkbox" />

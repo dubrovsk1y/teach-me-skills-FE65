@@ -10,20 +10,36 @@ const API = create({
   baseURL: "https://studapi.teachmeskills.by/",
 });
 
-const getPosts = () => {
+const getPostsApi = () => {
   return API.get("/blog/posts/");
 };
 
-const getSelectedPost = (id: string) => {
+const getSelectedPostApi = (id: string) => {
   return API.get(`/blog/posts/${id}/`);
 };
 
-const registerUser = (userData: UserType) => {
+const registerUserApi = (userData: UserType) => {
   return API.post("/auth/users/", userData);
 };
 
-const userActivate = (uuid: any, token: any) => {
+const activateUserApi = (uuid: string, token: string) => {
   return API.post("/auth/users/activation/", { uid: uuid, token });
 };
 
-export { getPosts, getSelectedPost, registerUser, userActivate };
+const loginUserApi = (data: any) => {
+  return API.post("/auth/jwt/create", data);
+};
+
+const getUserInfoApi = (token: any) => {
+  return API.get(
+    "/auth/users/me/",
+    {},
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+};
+
+export { getPostsApi, getSelectedPostApi, getUserInfoApi, registerUserApi, activateUserApi, loginUserApi };

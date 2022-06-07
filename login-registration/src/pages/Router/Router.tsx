@@ -22,7 +22,7 @@ const Router = () => {
             <Route path={"/post/:id"} element={<Post></Post>}></Route>
             <Route path={"/information"} element={<Information></Information>}></Route>
           </Route>
-          <Route path="*" element={<Navigate to={"/"} replace></Navigate>}></Route>
+          <Route path="*" element={<Navigate to={"/all-posts"} replace></Navigate>}></Route>
         </Routes>
       ) : (
         <Routes>
@@ -33,7 +33,7 @@ const Router = () => {
               element={<RegistrationConfirmation></RegistrationConfirmation>}
             ></Route>
           </Route>
-          <Route path="*" element={<Navigate to={"/"} replace></Navigate>}></Route>
+          <Route path="*" element={<Navigate to={"/auth"} replace></Navigate>}></Route>
         </Routes>
       )}
     </BrowserRouter>

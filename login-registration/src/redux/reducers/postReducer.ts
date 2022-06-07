@@ -21,7 +21,7 @@ const postSlice = createSlice({
   name: "posts",
   initialState,
   reducers: {
-    setPosts: (state: any, action) => {
+    setPosts: (state: any, action: any) => {
       state.postsList = action.payload.map((post: any) => {
         return {
           ...post,
@@ -30,39 +30,39 @@ const postSlice = createSlice({
         };
       });
     },
-    setSelectedPost: (state: any, action) => {
-      state.selectedPost = action.payload;
-    },
-    setLikePost: (state: any, action) => {
+    setLikePost: (state: any, action: any) => {
       const post = state.postsList.find((item: any) => item.id === action.payload.id);
       if (post) {
         post.likeStatus = action.payload.value;
       }
     },
-    setSavedPost: (state: any, action) => {
+    setSavedPost: (state: any, action: any) => {
       const post = state.postsList.find((item: any) => item.id === action.payload.id);
       if (post) {
         post.save = action.payload.value;
       }
     },
-    setSelectedImage: (state: any, action) => {
+    setSelectedPost: (state: any, action: any) => {
+      state.selectedPost = action.payload;
+    },
+    setSelectedImage: (state: any, action: any) => {
       state.selectedImage = action.payload;
     },
-    setPostsLoading: (state, action) => {
+    setPostsLoading: (state: any, action: any) => {
       state.postsLoading = action.payload;
     },
-    setSelectedPostLoading: (state, action) => {
+    setSelectedPostLoading: (state: any, action: any) => {
       state.selectedPostLoading = action.payload;
     },
-    loadPost: (state: any, action) => {},
-    loadData: (state: any, action) => {},
+    loadPost: (state: any, action: any) => {},
+    loadData: (state: any, action: any) => {},
   },
 });
 
 export const {
-  setSelectedPost,
   loadData,
   loadPost,
+  setSelectedPost,
   setLikePost,
   setSavedPost,
   setSelectedImage,

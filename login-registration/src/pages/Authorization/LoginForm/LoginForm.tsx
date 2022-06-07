@@ -1,16 +1,19 @@
 import React, { useState } from "react";
 import Button from "../../../components/Button";
 import Input from "../../../components/Input";
-import { Theme, useThemeContext } from "../../../context/themeModeContext";
 import checkForLowerСaseLetters from "../../../util/checkForLowerСaseLetters";
 import checkForUpperСaseLetters from "../../../util/checkForUpperСaseLetters";
 import checkForNumbers from "../../../util/checkForNubers";
 import checkForRuLetters from "../../../util/checkForRuLetters";
+import { Theme, useThemeContext } from "../../../context/themeModeContext";
+import { useDispatch } from "react-redux";
+import { loginUser } from "../../../redux/reducers/authReducer";
+import { loadUserInfoData } from "../../../redux/reducers/userReducer";
 
 const LoginForm = () => {
+  const dispatch = useDispatch();
   const { theme } = useThemeContext();
   const isLightTheme = theme === Theme.Light;
-
   const validationForm = (email: string, password: string) => {
     const validErrors: { email?: string; password?: string } = {};
 
@@ -32,13 +35,15 @@ const LoginForm = () => {
 
   const [validation, setValidation] = useState(validationForm(emailValue, passwordValue));
 
-  const onLoginSubmitForm = (event: any) => {
+  const onSubmitForm = (event: any) => {
     event.preventDefault();
     setFormActive(true);
     if (!validation) {
       setEmailValue("");
       setPasswordValue("");
       setFormActive(false);
+      dispatch(loginUser({ email: emailValue, password: passwordValue }));
+      dispatch(loadUserInfoData({}));
     }
   };
 
@@ -53,7 +58,7 @@ const LoginForm = () => {
   };
 
   return (
-    <form onSubmit={onLoginSubmitForm} action="" className="authorizationForm">
+    <form onSubmit={onSubmitForm} action="" className="authorizationForm">
       <div>
         <label>
           Email

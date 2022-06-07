@@ -1,16 +1,14 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { Theme, useThemeContext } from "../../../context/themeModeContext";
-
 import Button from "../../../components/Button";
 import Input from "../../../components/Input";
+import { useDispatch } from "react-redux";
+import { Theme, useThemeContext } from "../../../context/themeModeContext";
+import { registerUser } from "../../../redux/reducers/authReducer";
+import { setAuthorizarionTab } from "../../../redux/reducers/tabsReducer";
 import checkForLowerСaseLetters from "../../../util/checkForLowerСaseLetters";
 import checkForUpperСaseLetters from "../../../util/checkForUpperСaseLetters";
 import checkForNumbers from "../../../util/checkForNubers";
 import checkForRuLetters from "../../../util/checkForRuLetters";
-import { useDispatch } from "react-redux";
-import { login } from "../../../redux/actions/actions";
-import { registerUser } from "../../../redux/reducers/authReducer";
 
 const RegistrationForm = () => {
   const { theme } = useThemeContext();
@@ -50,29 +48,16 @@ const RegistrationForm = () => {
   const [validation, setValidation] = useState(
     validationForm(userNameValue, emailValue, passwordValue, passwordConfirmValue)
   );
-  const navigate = useNavigate();
-
-  // const uuid = "uuid";
-  // const token = "token";
 
   const onSubmitForm = (event: any) => {
     event.preventDefault();
     setFormActive(true);
-    // const callback = () => {
-    //   // window.location.href = `/activate/${id}`;
-    //   navigate(`/activate`, {
-    //     state: {
-    //       emailValue,
-    //     },
-    //   });
-    // };
     if (!validation) {
       dispatch(
         registerUser({
-          name: userNameValue,
+          username: userNameValue,
           email: emailValue,
           password: passwordValue,
-          // callback,
         })
       );
       setFormActive(false);
@@ -104,7 +89,7 @@ const RegistrationForm = () => {
   };
 
   const onLoginClick = () => {
-    dispatch(login());
+    dispatch(setAuthorizarionTab("LOGIN"));
   };
 
   return (
@@ -175,7 +160,7 @@ const RegistrationForm = () => {
       </div>
       <Button className={"default-button authorizationForm__btn"} text={"Registration"}></Button>
       <p className="authorizationForm__footer">
-        If you have account you can <span onClick={() => onLoginClick()}>login</span>
+        If you have account you can <span onClick={onLoginClick}>login</span>
       </p>
     </form>
   );
