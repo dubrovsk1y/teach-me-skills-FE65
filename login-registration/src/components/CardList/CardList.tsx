@@ -1,14 +1,18 @@
-import React from "react";
+import React, { FC } from "react";
 import Card from "../Card/Card";
 import "./CardList.css";
-import { Card as CardType } from "../../common/types";
+import { PostType, PostsListType } from "../../common/types";
 
-const CardList = ({ data }: any) => {
+type CardListProps = {
+  data: PostsListType;
+};
+
+const CardList: FC<CardListProps> = ({ data }) => {
   return (
     <div className="cardList">
       <div className="cardList__conatiner">
-        {data.map((card: CardType) => (
-          <Card data={card} key={card.id}></Card>
+        {data.map((post: PostType) => (
+          <Card data={post} key={post.id}></Card>
         ))}
       </div>
     </div>

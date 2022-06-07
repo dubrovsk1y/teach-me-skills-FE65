@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { Card } from "../../common/types";
+import { PostType } from "../../common/types";
 
 type PostState = {
-  selectedPost: Card | null;
+  selectedPost: PostType | null;
   selectedImage: string | Array<string> | null;
   postsList: [];
   postsLoading: boolean;
@@ -22,7 +22,7 @@ const postSlice = createSlice({
   initialState,
   reducers: {
     setPosts: (state: any, action: any) => {
-      state.postsList = action.payload.map((post: any) => {
+      state.postsList = action.payload.map((post: PostType) => {
         return {
           ...post,
           likeStatus: null,
@@ -80,11 +80,11 @@ export const PostSelectors = {
     const posts = state.post.postsList;
     switch (filter) {
       case "LIKED_POSTS":
-        return posts.filter((post: any) => post.likeStatus === "like");
+        return posts.filter((post: PostType) => post.likeStatus === "like");
       case "DISLIKED_POSTS":
-        return posts.filter((post: any) => post.likeStatus === "dislike");
+        return posts.filter((post: PostType) => post.likeStatus === "dislike");
       case "SAVED_POSTS":
-        return posts.filter((post: any) => post.save);
+        return posts.filter((post: PostType) => post.save);
       case "ALL_POSTS":
         return posts;
       default:

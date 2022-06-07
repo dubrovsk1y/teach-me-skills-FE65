@@ -1,5 +1,5 @@
-export type Card = {
-  id?: string;
+export type PostType = {
+  id: string;
   image?: string;
   title: string;
   text: string;
@@ -7,3 +7,5 @@ export type Card = {
   likeStatus: null | string;
   save: boolean;
 };
+
+export type PostsListType = Array<PostType>;

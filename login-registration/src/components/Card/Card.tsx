@@ -3,11 +3,11 @@ import "./Card.css";
 import Popup from "reactjs-popup";
 import { useDispatch, useSelector } from "react-redux";
 import { PostSelectors, setLikePost, setSavedPost, setSelectedImage } from "../../redux/reducers/postReducer";
-import { Card as CardType } from "../../common/types";
+import { PostType } from "../../common/types";
 import classNames from "classnames";
 
 type CardProps = {
-  data: CardType;
+  data: PostType;
 };
 
 const Card: FC<CardProps> = ({ data }) => {
