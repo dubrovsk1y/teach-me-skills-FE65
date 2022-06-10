@@ -4,16 +4,22 @@ import { PostType } from "../../common/types";
 type PostState = {
   selectedPost: PostType | null;
   selectedImage: string | Array<string> | null;
-  postsList: [];
-  postsLoading: boolean;
+  allPostsList: [];
+  myPostsList: [];
+  isAllPostsLoading: boolean;
+  isAddPostsLoading: boolean;
+  isMyPostsLoading: boolean;
   selectedPostLoading: boolean;
 };
 
 const initialState: PostState = {
   selectedPost: null,
   selectedImage: null,
-  postsList: [],
-  postsLoading: false,
+  allPostsList: [],
+  myPostsList: [],
+  isAllPostsLoading: false,
+  isAddPostsLoading: false,
+  isMyPostsLoading: false,
   selectedPostLoading: false,
 };
 
@@ -21,8 +27,17 @@ const postSlice = createSlice({
   name: "posts",
   initialState,
   reducers: {
-    setPosts: (state: any, action: any) => {
-      state.postsList = action.payload.map((post: PostType) => {
+    setAllPosts: (state: any, action: any) => {
+      state.allPostsList = action.payload.map((post: PostType) => {
+        return {
+          ...post,
+          likeStatus: null,
+          save: false,
+        };
+      });
+    },
+    setMyPosts: (state: any, action: any) => {
+      state.myPostsList = action.payload.map((post: PostType) => {
         return {
           ...post,
           likeStatus: null,
@@ -31,13 +46,15 @@ const postSlice = createSlice({
       });
     },
     setLikePost: (state: any, action: any) => {
-      const post = state.postsList.find((item: any) => item.id === action.payload.id);
+      const posts = [...state.allPostsList, ...state.myPostsList];
+      const post = posts.find((item: any) => item.id === action.payload.id);
       if (post) {
         post.likeStatus = action.payload.value;
       }
     },
     setSavedPost: (state: any, action: any) => {
-      const post = state.postsList.find((item: any) => item.id === action.payload.id);
+      const posts = [...state.allPostsList, ...state.myPostsList];
+      const post = posts.find((item: any) => item.id === action.payload.id);
       if (post) {
         post.save = action.payload.value;
       }
@@ -48,27 +65,36 @@ const postSlice = createSlice({
     setSelectedImage: (state: any, action: any) => {
       state.selectedImage = action.payload;
     },
-    setPostsLoading: (state: any, action: any) => {
-      state.postsLoading = action.payload;
+    setAllPostsLoading: (state: any, action: any) => {
+      state.isAllPostsLoading = action.payload;
+    },
+    setMyPostsLoading: (state: any, action: any) => {
+      state.isMyPostsLoading = action.payload;
     },
     setSelectedPostLoading: (state: any, action: any) => {
       state.selectedPostLoading = action.payload;
     },
-    loadPost: (state: any, action: any) => {},
-    loadData: (state: any, action: any) => {},
+    loadPostData: (state: any, action: any) => {},
+    loadAllPostsData: (state: any, action: any) => {},
+    loadMyPostsData: (state: any, action: any) => {},
+    createPost: (state: any, action: any) => {},
   },
 });
 
 export const {
-  loadData,
-  loadPost,
+  loadMyPostsData,
+  loadAllPostsData,
+  loadPostData,
   setSelectedPost,
   setLikePost,
   setSavedPost,
   setSelectedImage,
-  setPosts,
-  setPostsLoading,
+  setAllPosts,
+  setMyPosts,
+  setAllPostsLoading,
+  setMyPostsLoading,
   setSelectedPostLoading,
+  createPost,
 } = postSlice.actions;
 
 export default postSlice.reducer;
@@ -76,8 +102,8 @@ export default postSlice.reducer;
 export const PostSelectors = {
   getSelectedPost: (state: any) => state.post.selectedPost,
   getSelectedImage: (state: any) => state.post.selectedImage,
-  getPostsList: (state: any, filter: any) => {
-    const posts = state.post.postsList;
+  getPostsList: (state: any, filter: string, type: string) => {
+    const posts = type === "MY_POSTS_LIST" ? state.post.myPostsList : state.post.allPostsList;
     switch (filter) {
       case "LIKED_POSTS":
         return posts.filter((post: PostType) => post.likeStatus === "like");
@@ -91,6 +117,7 @@ export const PostSelectors = {
         return posts;
     }
   },
-  getPostsLoading: (state: any) => state.post.postsLoading,
+  getAllPostsLoading: (state: any) => state.post.isAllPostsLoading,
+  getMyPostsLoading: (state: any) => state.post.isMyPostsLoading,
   getSelectedPostLoading: (state: any) => state.post.selectedPostLoading,
 };

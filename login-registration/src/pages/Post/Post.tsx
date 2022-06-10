@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import "./Post.css";
 import { useDispatch, useSelector } from "react-redux";
-import { loadPost, PostSelectors } from "../../redux/reducers/postReducer";
+import { loadPostData, PostSelectors } from "../../redux/reducers/postReducer";
 import { useParams } from "react-router-dom";
 import Lottie from "react-lottie";
 import animationData from "../../lotties/98195-loader.json";
@@ -13,7 +13,7 @@ const Post = () => {
 
   useEffect(() => {
     if (id) {
-      dispatch(loadPost(id));
+      dispatch(loadPostData(id));
     }
   }, [id]);
 

@@ -4,12 +4,14 @@ type TabsState = {
   authorizationTab: string;
   informationTab: string;
   allPostsTab: string;
+  myPostsTab: string;
 };
 
 const initialState: TabsState = {
   authorizationTab: "LOGIN",
   informationTab: "TAB_1",
   allPostsTab: "ALL_POSTS",
+  myPostsTab: "ALL_POSTS",
 };
 
 const tabsSlice = createSlice({
@@ -25,10 +27,13 @@ const tabsSlice = createSlice({
     setAllPostsTab: (state, action) => {
       state.allPostsTab = action.payload;
     },
+    setMyPostsTab: (state, action) => {
+      state.myPostsTab = action.payload;
+    },
   },
 });
 
-export const { setAuthorizarionTab, setInformationTab, setAllPostsTab } = tabsSlice.actions;
+export const { setAuthorizarionTab, setInformationTab, setAllPostsTab, setMyPostsTab } = tabsSlice.actions;
 
 export default tabsSlice.reducer;
 
@@ -36,4 +41,5 @@ export const TabsSelectors = {
   getAuthorizarionTab: (state: any) => state.tabs.authorizationTab,
   getInformationTab: (state: any) => state.tabs.informationTab,
   getAllPostsTab: (state: any) => state.tabs.allPostsTab,
+  getMyPostsTab: (state: any) => state.tabs.myPostsTab,
 };

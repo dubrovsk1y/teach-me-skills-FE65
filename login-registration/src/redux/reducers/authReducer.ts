@@ -40,6 +40,7 @@ const authSlice = createSlice({
     loginUser: (state: any, action: PayloadAction<LoginUser>) => {},
     activateUser: (state: any, action: PayloadAction<ActivateUser>) => {},
     registerUser: (state: any, action: PayloadAction<RegisterUser>) => {},
+    logout: (state: any, action: any) => {},
     setAuthStatus: (state: any, action: PayloadAction<boolean>) => {
       state.authStatus = action.payload;
     },
@@ -67,6 +68,7 @@ export const {
   registerUser,
   activateUser,
   loginUser,
+  logout,
 } = authSlice.actions;
 
 export default authSlice.reducer;

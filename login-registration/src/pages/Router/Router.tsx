@@ -1,16 +1,26 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Route, BrowserRouter, Routes, Navigate } from "react-router-dom";
 import HeaderPage from "../../components/HeaderPage";
 import Authorization from "../Authorization";
 import RegistrationConfirmation from "../RegistrationConfirmation";
 import Information from "../Information";
 import Posts from "../Posts";
+import MyPosts from "../MyPosts";
+import AddPosts from "../AddPosts";
 import Post from "../Post";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { AuthSelectors } from "../../redux/reducers/authReducer";
+import { loadUserInfoData } from "../../redux/reducers/userReducer";
 
 const Router = () => {
+  const dispatch = useDispatch();
   const isLoggedIn = useSelector(AuthSelectors.getAuthStatus);
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      dispatch(loadUserInfoData({}));
+    }
+  }, [isLoggedIn]);
 
   return (
     <BrowserRouter>
@@ -18,7 +28,8 @@ const Router = () => {
         <Routes>
           <Route path={"/"} element={<HeaderPage isLoggedIn={isLoggedIn}></HeaderPage>}>
             <Route path={"/all-posts"} element={<Posts></Posts>}></Route>
-            <Route path={"/my-posts"} element={<Posts></Posts>}></Route>
+            <Route path={"/my-posts"} element={<MyPosts></MyPosts>}></Route>
+            <Route path={"/add-posts"} element={<AddPosts></AddPosts>}></Route>
             <Route path={"/post/:id"} element={<Post></Post>}></Route>
             <Route path={"/information"} element={<Information></Information>}></Route>
           </Route>

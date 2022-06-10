@@ -5,22 +5,24 @@ import Button from "../../components/Button";
 import Tab from "../../components/Tab";
 import { Theme, useThemeContext } from "../../context/themeModeContext";
 import { useDispatch, useSelector } from "react-redux";
-import { PostSelectors, loadData } from "../../redux/reducers/postReducer";
+import { PostSelectors, loadAllPostsData } from "../../redux/reducers/postReducer";
 import { TabsSelectors, setAllPostsTab } from "../../redux/reducers/tabsReducer";
 import Lottie from "react-lottie";
 import { defaultOptions } from "../../lotties/defaultOptions";
 import classNames from "classnames";
+import { useNavigate } from "react-router-dom";
 
 const Posts = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { theme } = useThemeContext();
   const isLightTheme = theme === Theme.Light;
-  const isPostsLoading = useSelector(PostSelectors.getPostsLoading);
+  const isAllPostsLoading = useSelector(PostSelectors.getAllPostsLoading);
   const activeTab = useSelector(TabsSelectors.getAllPostsTab);
-  const postsList = useSelector((state) => PostSelectors.getPostsList(state, activeTab));
+  const postsList = useSelector((state) => PostSelectors.getPostsList(state, activeTab, "ALL_POSTS_LIST"));
 
   useEffect(() => {
-    dispatch(loadData({}));
+    dispatch(loadAllPostsData({}));
   }, []);
 
   const onTabClick = (tab: string) => {
@@ -32,6 +34,7 @@ const Posts = () => {
       <div className="posts__container _container">
         <h1 className="posts__title">All posts</h1>
         <Button
+          onClick={() => navigate("/add-posts")}
           className={classNames("default-button", "addPostBtn", {
             ["_dark"]: !isLightTheme,
           })}
@@ -65,7 +68,7 @@ const Posts = () => {
             text={<span className="material-symbols-outlined"> bookmark </span>}
           ></Tab>
         </div>
-        {isPostsLoading ? (
+        {isAllPostsLoading ? (
           <Lottie options={defaultOptions} height={400} width={400} />
         ) : (
           <CardList data={postsList}></CardList>

@@ -11,8 +11,10 @@ import {
   LoginUser,
   setActivateUserLoading,
   setLoginUserLoading,
+  logout,
 } from "../reducers/authReducer";
 import { loginUserApi, registerUserApi, activateUserApi } from "../api";
+import { loadUserInfoData } from "../reducers/userReducer";
 
 function* registerUserSaga(action: PayloadAction<RegisterUser>) {
   yield put(setRegisterUserLoading(true));
@@ -38,15 +40,20 @@ function* activateUserSaga(action: any) {
 function* loginUserSaga(action: PayloadAction<LoginUser>) {
   yield put(setLoginUserLoading(true));
   const userData = action.payload;
-  const { status, data, problem } = yield call(loginUserApi, userData);
+  const { status, data } = yield call(loginUserApi, userData);
   if (status === 200) {
     localStorage.setItem("jwtAccessToken", data.access);
     localStorage.setItem("jwtRefreshToken", data.refresh);
+    yield put(loadUserInfoData({}));
     yield put(setAuthStatus(true));
-  } else {
-    console.error("ОШИБКА ПРИ ЛОГИНЕ", problem);
   }
   yield put(setLoginUserLoading(false));
+}
+
+function* logoutSaga() {
+  localStorage.removeItem("jwtAccessToken");
+  localStorage.removeItem("jwtRefreshToken");
+  yield put(setAuthStatus(false));
 }
 
 export default function* authWatcher() {
@@ -54,5 +61,6 @@ export default function* authWatcher() {
     takeLatest(registerUser, registerUserSaga),
     takeLatest(activateUser, activateUserSaga),
     takeLatest(loginUser, loginUserSaga),
+    takeLatest(logout, logoutSaga),
   ]);
 }

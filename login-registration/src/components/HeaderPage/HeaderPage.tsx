@@ -4,7 +4,7 @@ import { Outlet } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import { Theme, useThemeContext } from "../../context/themeModeContext";
 import { useDispatch, useSelector } from "react-redux";
-import { setAuthStatus } from "../../redux/reducers/authReducer";
+import { logout, setAuthStatus } from "../../redux/reducers/authReducer";
 import { setAuthorizarionTab } from "../../redux/reducers/tabsReducer";
 import classNames from "classnames";
 import { loadUserInfoData, UserSelectors } from "../../redux/reducers/userReducer";
@@ -34,8 +34,8 @@ const HeaderPage: FC<HeaderPageProps> = ({ isLoggedIn }) => {
   };
 
   const onLogOutClick = () => {
-    dispatch(setAuthStatus(false));
     setMenuOpen(false);
+    dispatch(logout({}));
   };
 
   return (

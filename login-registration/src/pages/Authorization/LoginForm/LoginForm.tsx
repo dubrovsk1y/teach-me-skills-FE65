@@ -43,7 +43,6 @@ const LoginForm = () => {
       setPasswordValue("");
       setFormActive(false);
       dispatch(loginUser({ email: emailValue, password: passwordValue }));
-      dispatch(loadUserInfoData({}));
     }
   };
 
