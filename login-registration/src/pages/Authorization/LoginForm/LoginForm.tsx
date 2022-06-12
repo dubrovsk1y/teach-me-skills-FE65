@@ -8,7 +8,6 @@ import checkForRuLetters from "../../../util/checkForRuLetters";
 import { Theme, useThemeContext } from "../../../context/themeModeContext";
 import { useDispatch } from "react-redux";
 import { loginUser } from "../../../redux/reducers/authReducer";
-import { loadUserInfoData } from "../../../redux/reducers/userReducer";
 
 const LoginForm = () => {
   const dispatch = useDispatch();

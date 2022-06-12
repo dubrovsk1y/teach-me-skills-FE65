@@ -1,13 +1,13 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useState } from "react";
 import "./HeaderPage.css";
 import { Outlet } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import { Theme, useThemeContext } from "../../context/themeModeContext";
 import { useDispatch, useSelector } from "react-redux";
-import { logout, setAuthStatus } from "../../redux/reducers/authReducer";
+import { logout } from "../../redux/reducers/authReducer";
 import { setAuthorizarionTab } from "../../redux/reducers/tabsReducer";
 import classNames from "classnames";
-import { loadUserInfoData, UserSelectors } from "../../redux/reducers/userReducer";
+import { UserSelectors } from "../../redux/reducers/userReducer";
 
 type HeaderPageProps = {
   isLoggedIn: boolean;

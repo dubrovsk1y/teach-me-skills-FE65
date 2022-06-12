@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./Posts.css";
 import CardList from "../../components/CardList";
 import Button from "../../components/Button";
@@ -11,6 +11,8 @@ import Lottie from "react-lottie";
 import { defaultOptions } from "../../lotties/defaultOptions";
 import classNames from "classnames";
 import { useNavigate } from "react-router-dom";
+import Input from "../../components/Input";
+import Pagination from "../../components/Pagination";
 
 const Posts = () => {
   const dispatch = useDispatch();
@@ -21,13 +23,35 @@ const Posts = () => {
   const activeTab = useSelector(TabsSelectors.getAllPostsTab);
   const postsList = useSelector((state) => PostSelectors.getPostsList(state, activeTab, "ALL_POSTS_LIST"));
 
+  const [search, setSearch] = useState("");
+  const [limit, setLimit] = useState(2);
+  const [page, setPage] = useState(1);
+  const totalCount = useSelector(PostSelectors.getTotalAllPostsCounter);
+  const pagesCount = Math.floor(totalCount / limit);
+
   useEffect(() => {
-    dispatch(loadAllPostsData({}));
-  }, []);
+    const offset = page * limit;
+    dispatch(loadAllPostsData({ search, limit, offset }));
+  }, [search, limit, page]);
 
   const onTabClick = (tab: string) => {
     dispatch(setAllPostsTab(tab));
   };
+
+  const onSearch = (event: any) => {
+    setSearch(event.target.value);
+    setPage(1);
+  };
+
+  const onLimitChange = (event: any) => {
+    setLimit(event.target.value);
+    setPage(1);
+  };
+
+  const onPrevClick = () => setPage(page - 1);
+  const onNextClick = () => setPage(page + 1);
+  const onLastClick = () => setPage(pagesCount);
+  const onFirstClick = () => setPage(1);
 
   return (
     <div className="posts">
@@ -40,6 +64,7 @@ const Posts = () => {
           })}
           text={"Add post"}
         ></Button>
+        <Input value={search} onChange={onSearch} placeholder="Search" type="text"></Input>
         <div className="posts__tabs">
           <Tab
             onClick={() => onTabClick("ALL_POSTS")}
@@ -68,11 +93,20 @@ const Posts = () => {
             text={<span className="material-symbols-outlined"> bookmark </span>}
           ></Tab>
         </div>
+        <Input className="posts__totalPostsOnPage" type={"number"} value={limit} onChange={onLimitChange} />
         {isAllPostsLoading ? (
           <Lottie options={defaultOptions} height={400} width={400} />
         ) : (
           <CardList data={postsList}></CardList>
         )}
+        <Pagination
+          pageNum={page}
+          pagesCount={pagesCount}
+          onPrevClick={onPrevClick}
+          onNextClick={onNextClick}
+          onFirstClick={onFirstClick}
+          onLastClick={onLastClick}
+        ></Pagination>
       </div>
     </div>
   );

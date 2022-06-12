@@ -1,0 +1,39 @@
+.pagination__btns {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.pagination__btn,
+.pagination__pageNum {
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-weight: 400;
+  font-size: 20px;
+  color: blue;
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid blue;
+  border-radius: 100%;
+  line-height: 115%;
+  letter-spacing: 0.06em;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.pagination__btn._inactive {
+  pointer-events: none;
+  border-color: gray;
+  color: gray;
+}
+
+.pagination__btn:hover {
+  background-color: blue;
+  color: white;
+}
+
+.pagination__pageNum {
+  cursor: default;
+}

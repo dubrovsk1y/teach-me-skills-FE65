@@ -12,13 +12,17 @@ import {
   setMyPostsLoading,
   setMyPosts,
   createPost,
+  setTotalAllPostsCounter,
 } from "../reducers/postReducer";
 import { callCheckingAuth } from "./callCheckingAuth";
 
-function* getAllPostsSaga() {
+function* getAllPostsSaga(action: any) {
   yield put(setAllPostsLoading(true));
-  const { data, status } = yield call(getAllPostsApi);
-  if (status === 200) yield put(setAllPosts(data.results));
+  const { data, status } = yield call(getAllPostsApi, action.payload);
+  if (status === 200) {
+    yield put(setAllPosts(data.results));
+    yield put(setTotalAllPostsCounter(data.count));
+  }
   yield put(setAllPostsLoading(false));
 }
 

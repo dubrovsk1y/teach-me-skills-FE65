@@ -3,7 +3,7 @@ import { loadUserInfoData, setUserInfo } from "../reducers/userReducer";
 import { getUserInfoApi } from "../api";
 import { callCheckingAuth } from "./callCheckingAuth";
 
-function* getUserInfoSaga(action: any) {
+function* getUserInfoSaga() {
   const { data, status } = yield callCheckingAuth(getUserInfoApi);
   if (status === 200) {
     yield put(setUserInfo({ username: data.username, email: data.email }));

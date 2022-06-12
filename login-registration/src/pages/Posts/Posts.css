@@ -10,10 +10,19 @@
 
 .addPostBtn {
   margin-bottom: 50px;
+  margin-right: 50px;
 }
 
 .posts__tabs {
   display: flex;
   gap: 50px;
+  margin-bottom: 50px;
+}
+
+.posts__totalPostsOnPage {
+  font-weight: bold;
+  width: 100px;
+  padding: 10px;
+  font-size: 16px;
   margin-bottom: 50px;
 }

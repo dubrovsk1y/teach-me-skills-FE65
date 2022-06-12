@@ -10,6 +10,7 @@ type PostState = {
   isAddPostsLoading: boolean;
   isMyPostsLoading: boolean;
   selectedPostLoading: boolean;
+  totalAllPostsCounter: number;
 };
 
 const initialState: PostState = {
@@ -21,6 +22,7 @@ const initialState: PostState = {
   isAddPostsLoading: false,
   isMyPostsLoading: false,
   selectedPostLoading: false,
+  totalAllPostsCounter: 0,
 };
 
 const postSlice = createSlice({
@@ -74,6 +76,9 @@ const postSlice = createSlice({
     setSelectedPostLoading: (state: any, action: any) => {
       state.selectedPostLoading = action.payload;
     },
+    setTotalAllPostsCounter: (state: any, action: any) => {
+      state.totalAllPostsCount = action.payload;
+    },
     loadPostData: (state: any, action: any) => {},
     loadAllPostsData: (state: any, action: any) => {},
     loadMyPostsData: (state: any, action: any) => {},
@@ -95,6 +100,7 @@ export const {
   setMyPostsLoading,
   setSelectedPostLoading,
   createPost,
+  setTotalAllPostsCounter,
 } = postSlice.actions;
 
 export default postSlice.reducer;
@@ -120,4 +126,5 @@ export const PostSelectors = {
   getAllPostsLoading: (state: any) => state.post.isAllPostsLoading,
   getMyPostsLoading: (state: any) => state.post.isMyPostsLoading,
   getSelectedPostLoading: (state: any) => state.post.selectedPostLoading,
+  getTotalAllPostsCounter: (state: any) => state.post.totalAllPostsCount,
 };

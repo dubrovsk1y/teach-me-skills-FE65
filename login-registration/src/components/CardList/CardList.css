@@ -1,3 +1,7 @@
+.cardList {
+  margin-bottom: 100px;
+}
+
 .cardList__conatiner {
   display: flex;
   flex-wrap: wrap;

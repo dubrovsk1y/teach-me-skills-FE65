@@ -3,10 +3,10 @@ import "./Input.css";
 
 type InputProps = {
   type: string;
-  className: string;
-  id: string;
-  placeholder: string;
-  value?: string;
+  className?: string;
+  id?: string;
+  placeholder?: string;
+  value?: string | number;
   onChange?: any;
 };
 
