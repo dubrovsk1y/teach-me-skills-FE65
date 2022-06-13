@@ -26,13 +26,14 @@ const Posts = () => {
   const [search, setSearch] = useState("");
   const [limit, setLimit] = useState(2);
   const [page, setPage] = useState(1);
+  const [ordering, setOrdering] = useState("date");
   const totalCount = useSelector(PostSelectors.getTotalAllPostsCounter);
   const pagesCount = Math.ceil(totalCount / limit);
 
   useEffect(() => {
     const offset = (page - 1) * limit;
-    dispatch(loadAllPostsData({ search, limit, offset }));
-  }, [search, limit, page]);
+    dispatch(loadAllPostsData({ search, limit, offset, ordering }));
+  }, [search, limit, page, ordering]);
 
   const onTabClick = (tab: string) => {
     dispatch(setAllPostsTab(tab));
@@ -45,6 +46,11 @@ const Posts = () => {
 
   const onLimitChange = (event: any) => {
     setLimit(event.target.value);
+    setPage(1);
+  };
+
+  const onChangeSelect = (event: any) => {
+    setOrdering(event.target.value);
     setPage(1);
   };
 
@@ -94,6 +100,12 @@ const Posts = () => {
           ></Tab>
         </div>
         <Input className="posts__totalPostsOnPage" type={"number"} value={limit} onChange={onLimitChange} />
+        <select className="posts__sortSelect" onChange={onChangeSelect}>
+          <option value={"date"}>Date</option>
+          <option value={"title"}>Title</option>
+          <option value={"text"}>Text</option>
+          <option value={"lesson_num"}>Lesson</option>
+        </select>
         {isAllPostsLoading ? (
           <Lottie options={defaultOptions} height={400} width={400} />
         ) : (

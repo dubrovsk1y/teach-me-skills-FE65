@@ -10,22 +10,23 @@ const AddPosts = () => {
   const [title, setTitle] = useState("");
   const [text, setText] = useState("");
   const [lessonNum, setLessonNum] = useState("");
-  const [image, setImage] = useState("");
+  const [selectedFile, setSelectedFile] = useState(null);
 
   const onSubmitForm = (event: any) => {
+    // DOESN'T WORK
     event.preventDefault();
     const postData = {
       title,
       text,
       lesson_num: +lessonNum,
-      image,
+      image: selectedFile,
     };
     dispatch(createPost(postData));
-    console.log(postData);
-    setTitle("");
-    setText("");
-    setLessonNum("");
-    setImage("");
+    console.log(postData.image);
+    // setTitle("");
+    // setText("");
+    // setLessonNum("");
+    // setImage("");
   };
 
   return (
@@ -77,8 +78,8 @@ const AddPosts = () => {
               Image
               <Input
                 className=""
-                onChange={(event: any) => setImage(event.target.value)}
-                value={image}
+                onChange={(event: any) => setSelectedFile(event.target.files[0])}
+                // value={image}
                 placeholder={"Enter your title"}
                 type={"file"}
                 id={"Image"}
