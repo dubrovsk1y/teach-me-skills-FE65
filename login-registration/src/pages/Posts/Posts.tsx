@@ -30,7 +30,7 @@ const Posts = () => {
   const pagesCount = Math.floor(totalCount / limit);
 
   useEffect(() => {
-    const offset = page * limit;
+    const offset = (page - 1) * limit;
     dispatch(loadAllPostsData({ search, limit, offset }));
   }, [search, limit, page]);
 
