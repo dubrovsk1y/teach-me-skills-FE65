@@ -27,7 +27,7 @@ const Posts = () => {
   const [limit, setLimit] = useState(2);
   const [page, setPage] = useState(1);
   const totalCount = useSelector(PostSelectors.getTotalAllPostsCounter);
-  const pagesCount = Math.floor(totalCount / limit);
+  const pagesCount = Math.ceil(totalCount / limit);
 
   useEffect(() => {
     const offset = (page - 1) * limit;
