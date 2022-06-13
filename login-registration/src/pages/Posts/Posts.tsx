@@ -13,6 +13,7 @@ import classNames from "classnames";
 import { useNavigate } from "react-router-dom";
 import Input from "../../components/Input";
 import Pagination from "../../components/Pagination";
+import { ALL_POSTS, DISLIKED_POSTS, LIKED_POSTS, SAVED_POSTS } from "../../constants/constants";
 
 const Posts = () => {
   const dispatch = useDispatch();
@@ -29,6 +30,29 @@ const Posts = () => {
   const [ordering, setOrdering] = useState("date");
   const totalCount = useSelector(PostSelectors.getTotalAllPostsCounter);
   const pagesCount = Math.ceil(totalCount / limit);
+
+  const TABS = [
+    {
+      tabName: "All",
+      id: Math.random(),
+      tab: ALL_POSTS,
+    },
+    {
+      tabName: <span className="material-symbols-outlined"> thumb_up </span>,
+      id: Math.random(),
+      tab: LIKED_POSTS,
+    },
+    {
+      tabName: <span className="material-symbols-outlined"> thumb_down </span>,
+      id: Math.random(),
+      tab: DISLIKED_POSTS,
+    },
+    {
+      tabName: <span className="material-symbols-outlined"> bookmark </span>,
+      id: Math.random(),
+      tab: SAVED_POSTS,
+    },
+  ];
 
   useEffect(() => {
     const offset = (page - 1) * limit;
@@ -72,32 +96,18 @@ const Posts = () => {
         ></Button>
         <Input value={search} onChange={onSearch} placeholder="Search" type="text"></Input>
         <div className="posts__tabs">
-          <Tab
-            onClick={() => onTabClick("ALL_POSTS")}
-            className={classNames("tab", {
-              ["_active"]: activeTab === "ALL_POSTS",
-            })}
-            text={"All"}
-          ></Tab>
-          <Tab
-            onClick={() => onTabClick("LIKED_POSTS")}
-            className={classNames("tab", {
-              ["_active"]: activeTab === "LIKED_POSTS",
-            })}
-            text={<span className="material-symbols-outlined"> thumb_up </span>}
-          ></Tab>
-          <Tab
-            onClick={() => onTabClick("DISLIKED_POSTS")}
-            className={classNames("tab", {
-              ["_active"]: activeTab === "DISLIKED_POSTS",
-            })}
-            text={<span className="material-symbols-outlined"> thumb_down </span>}
-          ></Tab>
-          <Tab
-            onClick={() => onTabClick("SAVED_POSTS")}
-            className={activeTab === "SAVED_POSTS" ? "tab _active" : "tab"}
-            text={<span className="material-symbols-outlined"> bookmark </span>}
-          ></Tab>
+          {TABS.map((item) => {
+            return (
+              <Tab
+                onClick={() => onTabClick(item.tab)}
+                className={classNames("tab", {
+                  ["_active"]: activeTab === item.tab,
+                })}
+                text={item.tabName}
+                key={item.id}
+              ></Tab>
+            );
+          })}
         </div>
         <Input className="posts__totalPostsOnPage" type={"number"} value={limit} onChange={onLimitChange} />
         <select className="posts__sortSelect" onChange={onChangeSelect}>

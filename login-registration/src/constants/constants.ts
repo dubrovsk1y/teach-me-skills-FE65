@@ -7,3 +7,7 @@ export const TEXT_2 =
   "Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim laudantium ipsam, assumenda sequi sint ipsa debitis esse inventore cupiditate cumque nesciunt. Libero, optio eius. Quidem culpa saepe qui quasi tempora?";
 export const TEXT_3 =
   "Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae ad quisquam unde error porro corporis! Aliquid veniam asperiores, iste optio ex commodi facilis vero vel, dolorum itaque quia autem consequuntur.";
+export const ALL_POSTS = "ALL_POSTS";
+export const LIKED_POSTS = "LIKED_POSTS";
+export const SAVED_POSTS = "SAVED_POSTS";
+export const DISLIKED_POSTS = "DISLIKED_POSTS";

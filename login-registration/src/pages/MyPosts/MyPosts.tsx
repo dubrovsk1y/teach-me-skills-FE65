@@ -40,6 +40,7 @@ const MyPosts = () => {
           })}
           text={"Add post"}
         ></Button>
+        {/* НУЖНЫ ЛИ ЗДЕСЬ ТАБЫ С СОРТИРОВКОЙ? */}
         <div className="myPosts__tabs">
           <Tab
             onClick={() => onTabClick("ALL_POSTS")}
