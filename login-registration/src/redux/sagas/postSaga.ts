@@ -26,9 +26,9 @@ function* getAllPostsSaga(action: any) {
   yield put(setAllPostsLoading(false));
 }
 
-function* getMyPostsSaga() {
+function* getMyPostsSaga(action: any) {
   yield put(setMyPostsLoading(true));
-  const { data, status } = yield callCheckingAuth(getMyPostsApi);
+  const { data, status } = yield callCheckingAuth(getMyPostsApi, action.payload);
   if (status === 200) yield put(setMyPosts(data));
   yield put(setMyPostsLoading(false));
 }

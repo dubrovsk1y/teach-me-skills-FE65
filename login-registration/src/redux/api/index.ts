@@ -10,11 +10,11 @@ const API = create({
   baseURL: "https://studapi.teachmeskills.by/",
 });
 
-const getAllPostsApi = ({ search = "", limit = 10, offset = 0, ordering = "date" }) => {
+const getAllPostsApi = ({ search = "", limit = 2, offset = 0, ordering = "date" }) => {
   return API.get("/blog/posts/", { search, limit, offset, ordering });
 };
 
-const getMyPostsApi = (token: any) => {
+const getMyPostsApi = (token: string) => {
   return API.get(
     "/blog/posts/my_posts/",
     {},
@@ -30,6 +30,7 @@ const createPostApi = (token: any, postData: any) => {
   return API.post("/blog/posts/", postData, {
     headers: {
       Authorization: `Bearer ${token}`,
+      "Content-Type": "multipart/form-data",
     },
   });
 };

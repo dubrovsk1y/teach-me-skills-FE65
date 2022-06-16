@@ -1,28 +1,35 @@
-import React, { useEffect, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import "./Posts.css";
+import Input from "../../components/Input";
 import CardList from "../../components/CardList";
 import Button from "../../components/Button";
 import Tab from "../../components/Tab";
 import { Theme, useThemeContext } from "../../context/themeModeContext";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { PostSelectors, loadAllPostsData } from "../../redux/reducers/postReducer";
-import { TabsSelectors, setAllPostsTab } from "../../redux/reducers/tabsReducer";
+import { PostSelectors, loadAllPostsData, loadMyPostsData } from "../../redux/reducers/postReducer";
+import { TabsSelectors, setAllPostsTab, setMyPostsTab } from "../../redux/reducers/tabsReducer";
 import Lottie from "react-lottie";
 import { defaultOptions } from "../../lotties/defaultOptions";
 import classNames from "classnames";
-import { useNavigate } from "react-router-dom";
-import Input from "../../components/Input";
 import Pagination from "../../components/Pagination";
 import { ALL_POSTS, DISLIKED_POSTS, LIKED_POSTS, SAVED_POSTS } from "../../constants/constants";
 
-const Posts = () => {
+type PostsProps = {
+  isPersonal: boolean;
+};
+
+const Posts: FC<PostsProps> = ({ isPersonal }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { theme } = useThemeContext();
   const isLightTheme = theme === Theme.Light;
   const isAllPostsLoading = useSelector(PostSelectors.getAllPostsLoading);
-  const activeTab = useSelector(TabsSelectors.getAllPostsTab);
-  const postsList = useSelector((state) => PostSelectors.getPostsList(state, activeTab, "ALL_POSTS_LIST"));
+  const isMyPostsLoading = useSelector(PostSelectors.getMyPostsLoading);
+  const activeTab = useSelector(isPersonal ? TabsSelectors.getMyPostsTab : TabsSelectors.getAllPostsTab);
+  const postsList = useSelector((state) =>
+    PostSelectors.getPostsList(state, activeTab, isPersonal ? "MY_POSTS_LIST" : "ALL_POSTS_LIST")
+  );
 
   const [search, setSearch] = useState("");
   const [limit, setLimit] = useState(2);
@@ -56,11 +63,11 @@ const Posts = () => {
 
   useEffect(() => {
     const offset = (page - 1) * limit;
-    dispatch(loadAllPostsData({ search, limit, offset, ordering }));
-  }, [search, limit, page, ordering]);
+    dispatch(isPersonal ? loadMyPostsData({}) : loadAllPostsData({ search, limit, offset, ordering }));
+  }, [search, limit, page, ordering, isPersonal]);
 
   const onTabClick = (tab: string) => {
-    dispatch(setAllPostsTab(tab));
+    dispatch(isPersonal ? setMyPostsTab(tab) : setAllPostsTab(tab));
   };
 
   const onSearch = (event: any) => {
@@ -86,7 +93,7 @@ const Posts = () => {
   return (
     <div className="posts">
       <div className="posts__container _container">
-        <h1 className="posts__title">All posts</h1>
+        <h1 className="posts__title">{isPersonal ? "My posts" : "All posts"}</h1>
         <Button
           onClick={() => navigate("/add-posts")}
           className={classNames("default-button", "addPostBtn", {
@@ -110,13 +117,15 @@ const Posts = () => {
           })}
         </div>
         <Input className="posts__totalPostsOnPage" type={"number"} value={limit} onChange={onLimitChange} />
-        <select className="posts__sortSelect" onChange={onChangeSelect}>
-          <option value={"date"}>Date</option>
-          <option value={"title"}>Title</option>
-          <option value={"text"}>Text</option>
-          <option value={"lesson_num"}>Lesson</option>
-        </select>
-        {isAllPostsLoading ? (
+        {!isPersonal && (
+          <select className="posts__sortSelect" onChange={onChangeSelect}>
+            <option value={"date"}>Date</option>
+            <option value={"title"}>Title</option>
+            <option value={"text"}>Text</option>
+            <option value={"lesson_num"}>Lesson</option>
+          </select>
+        )}
+        {isAllPostsLoading || isMyPostsLoading ? (
           <Lottie options={defaultOptions} height={400} width={400} />
         ) : (
           <CardList data={postsList}></CardList>

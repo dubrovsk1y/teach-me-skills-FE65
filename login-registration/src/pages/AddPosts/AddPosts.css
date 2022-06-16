@@ -5,10 +5,12 @@
 
 .addPosts__title {
   color: blue;
+  text-align: center;
   margin-bottom: 50px;
 }
 
 .addPosts__form {
+  margin: 0 auto;
   padding: 30px;
   border: 3px solid blue;
   border-radius: 20px;
@@ -16,4 +18,43 @@
   display: flex;
   flex-direction: column;
   gap: 30px;
+}
+
+.addPosts__form__item label {
+  font-weight: bold;
+}
+
+.addPosts__form__textarea {
+  resize: none;
+  width: 400px;
+  height: 200px;
+  border-radius: 20px;
+  padding: 10px;
+  border: 2px solid skyblue;
+  outline: none;
+}
+
+.addPosts__form__input {
+  width: 400px;
+}
+
+.addPosts__form__image {
+  max-width: 400px;
+}
+
+.dragAndDrop {
+  flex: 1;
+  display: flex;
+  padding: 18px 0;
+  justify-content: center;
+  align-items: center;
+
+  background: white;
+  border: 2px dashed skyblue;
+  box-sizing: border-box;
+  border-radius: 8px;
+}
+.dragAndDrop:hover {
+  cursor: pointer;
+  background: lightcyan;
 }

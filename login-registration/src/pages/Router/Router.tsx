@@ -5,7 +5,6 @@ import Authorization from "../Authorization";
 import RegistrationConfirmation from "../RegistrationConfirmation";
 import Information from "../Information";
 import Posts from "../Posts";
-import MyPosts from "../MyPosts";
 import AddPosts from "../AddPosts";
 import Post from "../Post";
 import { useDispatch, useSelector } from "react-redux";
@@ -27,8 +26,8 @@ const Router = () => {
       {isLoggedIn ? (
         <Routes>
           <Route path={"/"} element={<HeaderPage isLoggedIn={isLoggedIn}></HeaderPage>}>
-            <Route path={"/all-posts"} element={<Posts></Posts>}></Route>
-            <Route path={"/my-posts"} element={<MyPosts></MyPosts>}></Route>
+            <Route path={"/all-posts"} element={<Posts isPersonal={false}></Posts>}></Route>
+            <Route path={"/my-posts"} element={<Posts isPersonal={true}></Posts>}></Route>
             <Route path={"/add-posts"} element={<AddPosts></AddPosts>}></Route>
             <Route path={"/post/:id"} element={<Post></Post>}></Route>
             <Route path={"/information"} element={<Information></Information>}></Route>
