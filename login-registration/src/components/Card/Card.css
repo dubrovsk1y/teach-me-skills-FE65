@@ -1,38 +1,147 @@
 .card {
-    background-color: #FFFFFF;
-    padding: 10px;
-    border-radius: 9px;
-    width: 285px;
-    height: 250px; 
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: space-between;
+  background-color: #ffffff;
+  padding: 10px;
+  border-radius: 9px;
+  width: 285px;
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.card:hover {
+  background-color: rgb(245, 245, 245);
 }
 
 .card__image {
-    display: flex;
-    border-radius: 9px;
-    overflow: hidden;
+  display: flex;
+  border-radius: 9px;
+  overflow: hidden;
 }
 
 .card__image img {
-    width: 265px;
-    height: 100px;
+  width: 265px;
+  height: 100px;
 }
 
 .card__title {
-    font-weight: 400;
-    letter-spacing: 0.1em;
-    font-size: 18px;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  font-size: 18px;
 }
 
 .card__text {
-    font-size: 14px;
-    color: gray;
+  font-size: 14px;
+  color: gray;
 }
 
 .card__date {
-    color: skyblue;
-    font-weight: bold;
+  color: skyblue;
+  font-weight: bold;
+}
+
+.card__visibility:hover {
+  color: blue;
+}
+
+.popup-content {
+  margin: auto;
+  background: #ffffff;
+  border: 1px solid blue;
+  border-radius: 9px;
+  padding: 10px;
+}
+.popup-arrow {
+  color: ffffff;
+}
+[role="tooltip"].popup-content {
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 0px 3px;
+}
+
+.popup-overlay {
+  background: rgba(0, 0, 0, 0.5);
+}
+[data-popup="tooltip"].popup-overlay {
+  background: transparent;
+}
+
+.popup__image {
+  border-radius: 9px;
+  overflow: hidden;
+}
+
+.popup__image img {
+  width: 500px;
+  height: 300px;
+}
+
+.popup__btns {
+  display: flex;
+  justify-content: center;
+  gap: 200px;
+}
+
+.chevron {
+  transition: 0.3s;
+  cursor: pointer;
+  font-size: 50px;
+}
+
+.chevron:hover {
+  color: ffffff;
+}
+
+/* animation */
+
+@keyframes anvil {
+  0% {
+    transform: scale(1) translateY(0px);
+    opacity: 0;
+    box-shadow: 0 0 0 rgba(241, 241, 241, 0);
+  }
+  1% {
+    transform: scale(0.96) translateY(10px);
+    opacity: 0;
+    box-shadow: 0 0 0 rgba(241, 241, 241, 0);
+  }
+  100% {
+    transform: scale(1) translateY(0px);
+    opacity: 1;
+    box-shadow: 0 0 500px rgba(241, 241, 241, 0);
+  }
+}
+
+.popup-content {
+  animation: anvil 0.1s cubic-bezier(0.38, 0.1, 0.36, 0.9) forwards;
+}
+
+.card__btns {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.card__like,
+.card__dislike,
+.card__save {
+  transition: 0.1s;
+  font-size: 26px;
+}
+
+.card__like._active,
+.card__like:hover {
+  color: greenyellow;
+}
+
+.card__dislike:hover,
+.card__dislike._active {
+  color: red;
+}
+
+.card__save:hover,
+.card__save._active {
+  color: fuchsia;
 }

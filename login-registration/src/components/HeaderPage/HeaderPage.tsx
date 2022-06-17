@@ -1,86 +1,122 @@
-import React, { useState } from "react";
-import './HeaderPage.css'
-import { Outlet, useLocation } from "react-router-dom";
+import React, { FC, useState } from "react";
+import "./HeaderPage.css";
+import { Outlet } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import { Theme, useThemeContext } from "../../context/themeModeContext";
-import { useDispatch } from "react-redux";
-import { login, registartion } from "../../redux/actions/actions";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../../redux/reducers/authReducer";
+import { setAuthorizarionTab } from "../../redux/reducers/tabsReducer";
+import classNames from "classnames";
+import { UserSelectors } from "../../redux/reducers/userReducer";
 
-const HeaderPage = (props: any) => {
-    const { isLoggedIn } = props
-    const [isMenuOpen, setMenuOpen] = useState(false)
-    const { theme, onChangeTheme = () => {} } = useThemeContext()
-    const isLightTheme = theme === Theme.Light
-    const dispatch = useDispatch()
+type HeaderPageProps = {
+  isLoggedIn: boolean;
+};
 
-    const onClick = (isLogin: boolean) => {
-        isLogin ? dispatch(login()) : dispatch(registartion())
-    }
+const HeaderPage: FC<HeaderPageProps> = ({ isLoggedIn }) => {
+  const dispatch = useDispatch();
+  const [isMenuOpen, setMenuOpen] = useState(false);
+  const { theme, onChangeTheme = () => {} } = useThemeContext();
+  const isLightTheme = theme === Theme.Light;
+  const { username } = useSelector(UserSelectors.getUserInfo);
 
-    const onClickTheme = () => {
-        isLightTheme ? onChangeTheme(Theme.Dark) : onChangeTheme(Theme.Light)
-    }
-    
-    const onMenuClick = () => {
-        setMenuOpen(!isMenuOpen)
-    }
+  const onClick = (isLogin: boolean) => {
+    dispatch(setAuthorizarionTab(isLogin ? "LOGIN" : "REGISTRATION"));
+    setMenuOpen(false);
+  };
 
-    const onLogOutClick = () => {
-        localStorage.removeItem("isLoggedIn")
-        window.location.replace("/auth")
-    }
+  const onClickTheme = () => {
+    isLightTheme ? onChangeTheme(Theme.Dark) : onChangeTheme(Theme.Light);
+  };
 
-    return (
-        <div> 
-            <header className={isLightTheme ? "header" : "header _dark"}>
-                <div className="header__container _container">
-                    <div className="header__group">
-                        <div className="header__menu menu">
-                            <div className={isMenuOpen ? "menu__icon _active" : "menu__icon"} onClick={onMenuClick}>
-                                <span></span>
-                            </div>
-                            <nav className={isLightTheme ? (isMenuOpen ? "menu__body _active" : "menu__body") : (isMenuOpen ? "menu__body _active _dark" : "menu__body _dark")}>
-                                <div className="menu__body__container _container">                                        
-                                        {isLoggedIn ? (
-                                            <div className="menu__list">
-                                                <div className="menu__list__main">
-                                                    <ul>
-                                                        <li><NavLink to="/cards-list">All posts</NavLink></li>
-                                                    </ul>
-                                                    <ul>
-                                                        <li><NavLink to="/cards-list">My posts</NavLink></li>
-                                                        <li><NavLink to="/cards-list">Add posts</NavLink></li>
-                                                    </ul>
-                                                    <ul>
-                                                        <li><NavLink to="/information">Information</NavLink></li>
-                                                    </ul>
-                                                </div>
-                                                <ul>
-                                                    <li><NavLink onClick={onLogOutClick} to="/authorization">Log out</NavLink></li>
-                                                </ul>
-                                            </div>
-                                        ) : (
-                                            <div className="menu__list">
-                                                <ul>
-                                                    <li><NavLink to="/auth" onClick={() => onClick(true)}>Login</NavLink></li>
-                                                    <li><NavLink to="/auth" onClick={() => onClick(false)}>Registration</NavLink></li>
-                                                </ul>
-                                            </div>
-                                        )}  
-                                </div>
-                            </nav> 
-                        </div>
-                        {isLoggedIn ? <h3 className="header__title">Username</h3> : ""} 
+  const onMenuClick = () => {
+    setMenuOpen(!isMenuOpen);
+  };
+
+  const onLogOutClick = () => {
+    setMenuOpen(false);
+    dispatch(logout({}));
+  };
+
+  return (
+    <div>
+      <header className={classNames("header", { ["_dark"]: !isLightTheme })}>
+        <div className="header__container _container">
+          <div className="header__group">
+            <div className="header__menu menu">
+              <div className={classNames("menu__icon", { ["_active"]: isMenuOpen })} onClick={onMenuClick}>
+                <span></span>
+              </div>
+              <nav className={classNames("menu__body", { ["_active"]: isMenuOpen, ["_dark"]: !isLightTheme })}>
+                <div className="menu__body__container _container">
+                  {isLoggedIn ? (
+                    <div className="menu__list">
+                      <div className="menu__list__main">
+                        <ul>
+                          <li>
+                            <NavLink onClick={onMenuClick} to="/all-posts">
+                              All posts
+                            </NavLink>
+                          </li>
+                        </ul>
+                        <ul>
+                          <li>
+                            <NavLink onClick={onMenuClick} to="/my-posts">
+                              My posts
+                            </NavLink>
+                          </li>
+                          <li>
+                            <NavLink onClick={onMenuClick} to="/add-posts">
+                              Add posts
+                            </NavLink>
+                          </li>
+                        </ul>
+                        <ul>
+                          <li>
+                            <NavLink onClick={onMenuClick} to="/information">
+                              Information
+                            </NavLink>
+                          </li>
+                        </ul>
+                      </div>
+                      <ul>
+                        <li>
+                          <NavLink onClick={onLogOutClick} to="/auth">
+                            Log out
+                          </NavLink>
+                        </li>
+                      </ul>
                     </div>
-                    <div className="checkbox__group">
-                        <input type="checkbox" className="checkbox" id="checkbox"/>
-                        <label onClick={onClickTheme} className="checkbox__label" htmlFor="checkbox"></label>
+                  ) : (
+                    <div className="menu__list">
+                      <ul>
+                        <li>
+                          <NavLink to="/auth" onClick={() => onClick(true)}>
+                            Login
+                          </NavLink>
+                        </li>
+                        <li>
+                          <NavLink to="/auth" onClick={() => onClick(false)}>
+                            Registration
+                          </NavLink>
+                        </li>
+                      </ul>
                     </div>
+                  )}
                 </div>
-            </header>
-            <Outlet></Outlet>
+              </nav>
+            </div>
+            {isLoggedIn ? <h3 className="header__title">{username}</h3> : ""}
+          </div>
+          <div className="checkbox__group">
+            <input type="checkbox" className="checkbox" id="checkbox" />
+            <label onClick={onClickTheme} className="checkbox__label" htmlFor="checkbox"></label>
+          </div>
         </div>
-    )
-}
+      </header>
+      <Outlet></Outlet>
+    </div>
+  );
+};
 
-export default HeaderPage
+export default HeaderPage;

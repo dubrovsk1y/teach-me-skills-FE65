@@ -1,32 +1,31 @@
-import React, { FC } from "react";
+import React from "react";
+import "./HeaderForm.css";
 import { useDispatch, useSelector } from "react-redux";
-import { login, registartion } from "../../../redux/actions/actions";
-import { LOGIN } from "../../../redux/types";
-import './HeaderForm.css';
+import { setAuthorizarionTab, TabsSelectors } from "../../../redux/reducers/tabsReducer";
+import classNames from "classnames";
 
 const HeaderForm = () => {
-    const dispatch = useDispatch()
-    const activeTab = useSelector((state: any) => state.activeTab)
+  const dispatch = useDispatch();
+  const activeTab = useSelector(TabsSelectors.getAuthorizarionTab);
+  const isLoginActive = activeTab === "LOGIN";
 
-    const isLoginActive = activeTab === LOGIN
+  return (
+    <div className="headerForm">
+      <h3
+        onClick={() => dispatch(setAuthorizarionTab("LOGIN"))}
+        className={classNames("title", { ["_active"]: isLoginActive })}
+      >
+        Login
+      </h3>
+      <span>|</span>
+      <h3
+        onClick={() => dispatch(setAuthorizarionTab("REGISTRATION"))}
+        className={classNames("title", { ["_active"]: !isLoginActive })}
+      >
+        Registration
+      </h3>
+    </div>
+  );
+};
 
-    const onClick = (isLogin: boolean) => {
-        dispatch(isLogin ? login() : registartion())
-    }
-
-    return (
-        <div className="headerForm">
-            <h3 
-                onClick={() => onClick(true)} 
-                className={isLoginActive ? 'title _title-active' : 'title'}>Login</h3>
-            <span>|</span>
-            <h3 
-                onClick={() => onClick(false)} 
-                className={isLoginActive ? 'title' : 'title _title-active'}>
-                Registration
-            </h3>
-        </div>
-    )
-}
-
-export default HeaderForm
+export default HeaderForm;
